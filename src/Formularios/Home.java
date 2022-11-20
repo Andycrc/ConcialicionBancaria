@@ -59,7 +59,7 @@ public class Home extends javax.swing.JPanel {
         jLabel8.setBackground(new java.awt.Color(153, 255, 255));
         jLabel8.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("------");
+        jLabel8.setText("Pacheco Magaña David Oswaldo");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, -1, 20));
 
         jLabel7.setBackground(new java.awt.Color(153, 255, 255));
