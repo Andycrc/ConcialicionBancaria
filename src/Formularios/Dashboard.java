@@ -55,24 +55,15 @@ public class Dashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         Menu = new javax.swing.JPanel();
-        btn_exit = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        btn_3 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        btn_2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        btn_1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         btn_home = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         app_name = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
+        btn_1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         Header = new javax.swing.JPanel();
         red_squr = new javax.swing.JPanel();
         exit = new javax.swing.JLabel();
@@ -98,85 +89,46 @@ public class Dashboard extends javax.swing.JFrame {
         Menu.setBackground(new java.awt.Color(13, 71, 161));
         Menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_exit.setBackground(new java.awt.Color(13, 71, 161));
-        btn_exit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_exit.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_home.setBackground(new java.awt.Color(13, 71, 161));
+        btn_home.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_home.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_exitMouseEntered(evt);
+                btn_homeMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_exitMouseExited(evt);
+                btn_homeMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                btn_exitMousePressed(evt);
+                btn_homeMousePressed(evt);
             }
         });
-        btn_exit.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btn_home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("X");
-        btn_exit.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/home-outline.png"))); // NOI18N
+        btn_home.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Exit");
-        btn_exit.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Home");
+        btn_home.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, 30));
 
-        Menu.add(btn_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 270, 50));
+        Menu.add(btn_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 140, 50));
 
-        btn_3.setBackground(new java.awt.Color(13, 71, 161));
-        btn_3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_3MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_3MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btn_3MousePressed(evt);
-            }
-        });
-        btn_3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        app_name.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        app_name.setForeground(new java.awt.Color(255, 255, 255));
+        app_name.setText("Software Contable");
+        Menu.add(app_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/account-multiple.png"))); // NOI18N
-        btn_3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
+        jSeparator1.setPreferredSize(new java.awt.Dimension(50, 5));
+        Menu.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 190, 10));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Name frm");
-        btn_3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
-
-        Menu.add(btn_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 270, 50));
-
-        btn_2.setBackground(new java.awt.Color(13, 71, 161));
-        btn_2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_2MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btn_2MousePressed(evt);
-            }
-        });
-        btn_2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/account-multiple.png"))); // NOI18N
-        btn_2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Name frm");
-        btn_2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
-
-        Menu.add(btn_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 270, 50));
+        jLabel10.setFont(new java.awt.Font("Roboto Medium", 0, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Empresa:");
+        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Menu.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 40, 210, 40));
 
         btn_1.setBackground(new java.awt.Color(13, 71, 161));
         btn_1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -202,48 +154,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel6.setText("Libro Contable");
         btn_1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
 
-        Menu.add(btn_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 270, 50));
-
-        btn_home.setBackground(new java.awt.Color(13, 71, 161));
-        btn_home.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_home.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_homeMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_homeMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btn_homeMousePressed(evt);
-            }
-        });
-        btn_home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/home-outline.png"))); // NOI18N
-        btn_home.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Home");
-        btn_home.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
-
-        Menu.add(btn_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 270, 50));
-
-        app_name.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        app_name.setForeground(new java.awt.Color(255, 255, 255));
-        app_name.setText("Software Contable");
-        Menu.add(app_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
-
-        jSeparator1.setPreferredSize(new java.awt.Dimension(50, 5));
-        Menu.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 190, 20));
-
-        jLabel10.setFont(new java.awt.Font("Roboto Medium", 0, 24)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("Empresa:");
-        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Menu.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 210, 40));
+        Menu.add(btn_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 170, 50));
 
         Header.setBackground(new java.awt.Color(25, 118, 210));
 
@@ -333,7 +244,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(HeaderLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 841, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1019, Short.MAX_VALUE)
                 .addComponent(minin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(red_squr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -361,20 +272,18 @@ public class Dashboard extends javax.swing.JFrame {
         );
         contenedorLayout.setVerticalGroup(
             contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 563, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(Header, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Header, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -383,9 +292,9 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Menu, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
-                    .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -425,7 +334,7 @@ public class Dashboard extends javax.swing.JFrame {
         registrot rg;
         try {
             rg = new registrot();
-                   rg.setSize(900,661);
+                   rg.setSize(1368,568);
                            contenedor.removeAll();
         contenedor.add(rg, BorderLayout.CENTER);
         contenedor.revalidate();
@@ -438,51 +347,6 @@ public class Dashboard extends javax.swing.JFrame {
         
 
     }//GEN-LAST:event_btn_1MousePressed
-
-    private void btn_2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_2MouseEntered
-        // TODO add your handling code here:
-        btn_2.setBackground(new Color(0, 156, 223)); 
-    }//GEN-LAST:event_btn_2MouseEntered
-
-    private void btn_2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_2MouseExited
-        // TODO add your handling code here:
-        btn_2.setBackground(new Color(13,71,161));
-    }//GEN-LAST:event_btn_2MouseExited
-
-    private void btn_2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_2MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_2MousePressed
-
-    private void btn_3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_3MouseEntered
-        // TODO add your handling code here:
-        btn_3.setBackground(new Color(0, 156, 223)); 
-    }//GEN-LAST:event_btn_3MouseEntered
-
-    private void btn_3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_3MouseExited
-        // TODO add your handling code here:
-        btn_3.setBackground(new Color(13,71,161));
-    }//GEN-LAST:event_btn_3MouseExited
-
-    private void btn_3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_3MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_3MousePressed
-
-    private void btn_exitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_exitMouseEntered
-        // TODO add your handling code here:
-        btn_exit.setBackground(new Color(0, 156, 223)); 
-    }//GEN-LAST:event_btn_exitMouseEntered
-
-    private void btn_exitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_exitMouseExited
-        // TODO add your handling code here:
-        btn_exit.setBackground(new Color(13,71,161));
-    }//GEN-LAST:event_btn_exitMouseExited
-
-    private void btn_exitMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_exitMousePressed
-        // TODO add your handling code here:
-        FrmMain main = new FrmMain();
-        main.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btn_exitMousePressed
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         // TODO add your handling code here:
@@ -596,24 +460,15 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel Menu;
     private javax.swing.JLabel app_name;
     private javax.swing.JPanel btn_1;
-    private javax.swing.JPanel btn_2;
-    private javax.swing.JPanel btn_3;
-    private javax.swing.JPanel btn_exit;
     private javax.swing.JPanel btn_home;
     public static javax.swing.JPanel contenedor;
     private javax.swing.JLabel exit;
     private javax.swing.JLabel exit2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel minin;

@@ -58,9 +58,9 @@ public class AsientoModel {
 
                 datos.setNP(resultados.getString("op"));
                 datos.setFechaop(resultados.getString("fecha"));       
-                 datos.setDesc(resultados.getString("descrip"));
-                  datos.setCargo(resultados.getString("cargo"));
-                 datos.setAbono(resultados.getString("abono"));
+                datos.setDesc(resultados.getString("descrip"));
+                datos.setCargo(resultados.getString("cargo"));
+                datos.setAbono(resultados.getString("abono"));
                 datos.setSaldoi(resultados.getString("saldoinicial"));
 
                model.addRow(new Object[]{datos.getNP(), 
