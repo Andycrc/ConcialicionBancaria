@@ -7,6 +7,7 @@ package Formularios;
 import Entidades.Render;
 import Conexion.conector;
 import Models.AsientoModel;
+import Models.AsientoModel2;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,12 +31,13 @@ public class registrot extends javax.swing.JPanel {
     String vFecha,vDescriP,vNP,vSaldoi,vCargo,vAbono;
     DefaultTableModel jtModelo,JTableModel2;
     AsientoModel cn;
+    AsientoModel2 cn2;
     int contador=0;
 
     public registrot() throws SQLException{
         initComponents();
             cn = new AsientoModel();
-
+            cn2 = new AsientoModel2();
         this.cargoabono();
        jtModelo = (DefaultTableModel) this.tablaLB.getModel();
        JTableModel2 = (DefaultTableModel) this.tablaEC.getModel();
@@ -48,8 +50,14 @@ public class registrot extends javax.swing.JPanel {
      public void cargarDatos() throws SQLException {
 
         jtModelo = cn.obtenerDatos();
-        this.tablaLB.setModel(jtModelo);
+        this.tablaEC.setModel(jtModelo);
+        this.tablaEC.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        JTableModel2 = cn2.obtenerDatos();
+        this.tablaLB.setModel(JTableModel2);
         this.tablaLB.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+        
+        
 
     }
     public void cargoabono(){
@@ -74,7 +82,7 @@ public class registrot extends javax.swing.JPanel {
 
     }
     public void saldoInic(){
-        if (tablaLB.getRowCount() == 0){
+        if (tablaEC.getRowCount() == 0){
 //            this.panelEC.setVisible(false);
 //            this.panelLB.setVisible(false);
 //            this.panel1.setVisible(false);
@@ -83,6 +91,7 @@ public class registrot extends javax.swing.JPanel {
             
             
         }else{
+            this.procesar();
             this.Saldoi.setEnabled(false);
             this.Saldoi.setVisible(false);
             this.IniciarB.setVisible(false);
@@ -91,6 +100,51 @@ public class registrot extends javax.swing.JPanel {
 
             
         }
+    }
+    
+    public void procesar(){
+        double sumA = 0, sumC = 0,saldoInicial=0;
+
+         //sacamos totales de abonos y cargos TABLA LB
+        for (int i = 0; i < tablaEC.getRowCount(); i++) {
+            if(i==0){
+              saldoInicial= Double.valueOf((String) tablaEC.getValueAt(i, 5));
+            }
+            
+            sumA = sumA + Double.valueOf((String) tablaEC.getValueAt(i, 4));
+            sumC = sumC + Double.valueOf((String) tablaEC.getValueAt(i, 3));
+
+        }
+        this.abonosEC.setText(""+sumA);
+        this.cargosEC.setText(""+sumC);
+        this.saldoIniciarEC.setText(""+saldoInicial);
+        Double VTotalEC=saldoInicial+sumA-sumC;
+        this.totalEC.setText(""+VTotalEC);
+        
+        sumA = 0;
+        sumC = 0;
+        saldoInicial=0;
+        //sacamos totales de abonos y cargos de TABLA EC
+        for (int i = 0; i < tablaLB.getRowCount(); i++) {
+            if(i==0){
+                saldoInicial= Double.valueOf((String) tablaLB.getValueAt(i, 5));
+                System.out.println(""+saldoInicial);
+
+            }
+            sumA = sumA + Double.valueOf((String) tablaLB.getValueAt(i, 4));
+            sumC = sumC + Double.valueOf((String) tablaLB.getValueAt(i, 3));
+
+        }
+        System.out.println("llegue hasta aqui");
+           //DATOS FINALES TABLA LB
+        this.abonoslb.setText(""+sumA);
+        this.cargoslb.setText(""+sumC);
+        this.saldosLb.setText(""+saldoInicial);
+        Double VTotalLB= saldoInicial+sumA-sumC;
+        this.TotalLB.setText(""+VTotalLB);
+        System.out.println("terminamos bien");
+        
+    
     }
 
     /**
@@ -104,7 +158,7 @@ public class registrot extends javax.swing.JPanel {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablaLB = new javax.swing.JTable();
+        tablaEC = new javax.swing.JTable();
         panel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         fechFC = new com.toedter.calendar.JDateChooser();
@@ -119,7 +173,7 @@ public class registrot extends javax.swing.JPanel {
         LBA = new javax.swing.JButton();
         ECB = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tablaEC = new javax.swing.JTable();
+        tablaLB = new javax.swing.JTable();
         panelLB = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         saldosLb = new javax.swing.JTextField();
@@ -155,8 +209,8 @@ public class registrot extends javax.swing.JPanel {
         setAlignmentY(0.0F);
         setPreferredSize(getPreferredSize());
 
-        tablaLB.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        tablaLB.setModel(new javax.swing.table.DefaultTableModel(
+        tablaEC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tablaEC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -164,8 +218,8 @@ public class registrot extends javax.swing.JPanel {
                 "Numero op", "Fecha ", "Descripcion", "Cargo", "Abono", "Saldo", "Eliminar"
             }
         ));
-        tablaLB.setGridColor(new java.awt.Color(255, 255, 255));
-        jScrollPane2.setViewportView(tablaLB);
+        tablaEC.setGridColor(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setViewportView(tablaEC);
 
         panel1.setBackground(new java.awt.Color(255, 255, 255));
         panel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -294,8 +348,8 @@ public class registrot extends javax.swing.JPanel {
 
         fechFC.getAccessibleContext().setAccessibleName("");
 
-        tablaEC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        tablaEC.setModel(new javax.swing.table.DefaultTableModel(
+        tablaLB.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tablaLB.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -303,8 +357,8 @@ public class registrot extends javax.swing.JPanel {
                 "No.op", "Fecha op.", "Desc", "Cargo", "Abono", "Saldo", "Eliminar"
             }
         ));
-        tablaEC.setGridColor(new java.awt.Color(255, 255, 255));
-        jScrollPane3.setViewportView(tablaEC);
+        tablaLB.setGridColor(new java.awt.Color(255, 255, 255));
+        jScrollPane3.setViewportView(tablaLB);
 
         panelLB.setBackground(new java.awt.Color(255, 255, 255));
         panelLB.setBorder(javax.swing.BorderFactory.createTitledBorder("Resumen de datos"));
@@ -343,7 +397,7 @@ public class registrot extends javax.swing.JPanel {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelLBLayout.createSequentialGroup()
                             .addComponent(jLabel6)
                             .addGap(18, 18, 18)
-                            .addComponent(abonoslb, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
+                            .addComponent(abonoslb, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelLBLayout.createSequentialGroup()
                             .addGroup(panelLBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel5)
@@ -572,8 +626,8 @@ public class registrot extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane3))
-                        .addGap(18, 18, 18)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panelEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(panelLB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -601,12 +655,12 @@ public class registrot extends javax.swing.JPanel {
                         .addGap(23, 23, 23)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panelLB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(24, Short.MAX_VALUE))))
+                        .addGap(0, 65, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jPanel1oc.getAccessibleContext().setAccessibleName("");
@@ -656,7 +710,7 @@ public class registrot extends javax.swing.JPanel {
                     btn2.setName("e");
 
                     jtModelo.addRow(new Object[]{
-                        vNP, vFecha,vDescriP, vCargo,vAbono, btn2
+                        vNP, vFecha,vDescriP, vCargo,vAbono,'0'
                     });
                     this.limpiarjtex();
 
@@ -688,60 +742,23 @@ public class registrot extends javax.swing.JPanel {
         Connection cn = cc.conectar();
         int cont = 0;
         String consult = "insert into librobanco(op,saldoinicial,cargo,abono,descrip,fecha) values(?,?,?,?,?,?)";
-        double sumA = 0, sumC = 0,saldoInicial=0;
+        String consult2 ="insert into librobanco(op,saldoinicial,cargo,abono,descrip,fecha) values(?,?,?,?,?,?)";
 
-        //sacamos totales de abonos y cargos TABLA LB
-        for (int i = 0; i < tablaLB.getRowCount(); i++) {
-            System.out.println("entre al priemer for");
-            if(i==1){
-                saldoInicial= Double.valueOf((String) tablaLB.getValueAt(i, 5));
-
-            }
-            sumA = sumA + Double.valueOf((String) tablaLB.getValueAt(i, 4));
-            sumC = sumC + Double.valueOf((String) tablaLB.getValueAt(i, 3));
-
-        }
-        //DATOS FINALES TABLA LB
-        this.abonoslb.setText(""+sumA);
-        this.cargoslb.setText(""+sumC);
-        this.saldosLb.setText(""+saldoInicial);
-        Double VTotalLB=saldoInicial+sumA-sumC;
-        this.TotalLB.setText(""+VTotalLB);
-        
-        sumA = 0;
-        sumC = 0;
-        saldoInicial=0;
-        //sacamos totales de abonos y cargos de TABLA EC
-        for (int i = 0; i < tablaEC.getRowCount(); i++) {
-            System.out.println("entre al priemer for");
-            if(i==1){
-                saldoInicial= Double.valueOf((String) tablaEC.getValueAt(i, 5));
-
-            }
-            sumA = sumA + Double.valueOf((String) tablaEC.getValueAt(i, 4));
-            sumC = sumC + Double.valueOf((String) tablaEC.getValueAt(i, 3));
-
-        }
-        this.abonosEC.setText(""+sumA);
-        this.cargosEC.setText(""+sumC);
-        this.saldoIniciarEC.setText(""+saldoInicial);
-        Double VTotalEC=saldoInicial+sumA-sumC;
-        this.TotalLB.setText(""+VTotalEC);
-        
-        //insertamos en la base
+       
+        //insertamos en la base en tabla LB
              try {
                 //Statement stmt = cn.createStatement();
 
-                if (tablaLB.getRowCount() == 0) {
+                if (tablaEC.getRowCount() == 0) {
                     JOptionPane.showMessageDialog(null, "No Existen Datos", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    System.out.println("aqui siiiiiiu");
-                    for (int i = 0; i < tablaLB.getRowCount(); i++) {
-                        vNP = (String) tablaLB.getValueAt(i, 0);
-                        vFecha = (String) tablaLB.getValueAt(i, 1);
-                        vDescriP = (String) tablaLB.getValueAt(i, 2);
-                        vCargo = (String) tablaLB.getValueAt(i, 3);
-                        vAbono = (String) tablaLB.getValueAt(i, 4);
+                    this.procesar();
+                    for (int i = 0; i < tablaEC.getRowCount(); i++) {
+                        vNP = (String) tablaEC.getValueAt(i, 0);
+                        vFecha = (String) tablaEC.getValueAt(i, 1);
+                        vDescriP = (String) tablaEC.getValueAt(i, 2);
+                        vCargo = (String) tablaEC.getValueAt(i, 3);
+                        vAbono = (String) tablaEC.getValueAt(i, 4);
 
                         PreparedStatement ps = cn.prepareStatement(consult);
                         
@@ -770,12 +787,53 @@ public class registrot extends javax.swing.JPanel {
 
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }
-        
+        //Insertamos en base en table EC
+            try {
+                //Statement stmt = cn.createStatement();
+
+                if (tablaLB.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(null, "No Existen Datos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    for (int i = 0; i < tablaLB.getRowCount(); i++) {
+                        vNP = (String) tablaLB.getValueAt(i, 0);
+                        vFecha = (String) tablaLB.getValueAt(i, 1);
+                        vDescriP = (String) tablaLB.getValueAt(i, 2);
+                        vCargo = (String) tablaLB.getValueAt(i, 3);
+                        vAbono = (String) tablaLB.getValueAt(i, 4);
+
+                        PreparedStatement ps = cn.prepareStatement(consult2);
+                        
+  
+     
+                            ps.setInt(1, Integer.parseInt(vNP));
+                            ps.setDouble(2, Double.parseDouble(vSaldoi));
+                            ps.setDouble(3, Double.parseDouble(vCargo));
+                            ps.setDouble(4, Double.parseDouble(vAbono));
+                            ps.setString(5, vDescriP);
+                            ps.setString(6, vFecha);
+
+                       
+
+
+
+                 
+                        ps.executeUpdate();
+
+                    }
+                    JOptionPane.showMessageDialog(null, "Cambios guardados con exito.", "Con exito", JOptionPane.INFORMATION_MESSAGE);
+
+                }
+
+            } catch (Exception e) {
+
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        this.procesar();
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -853,7 +911,7 @@ public class registrot extends javax.swing.JPanel {
                     btn2.setName("e");
 
                     JTableModel2.addRow(new Object[]{
-                        vNP, vFecha,vDescriP, vCargo,vAbono,"0", btn2
+                        vNP, vFecha,vDescriP, vCargo,vAbono,"0"
                     });
                     this.limpiarjtex();
 
