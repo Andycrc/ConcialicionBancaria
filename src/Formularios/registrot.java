@@ -50,11 +50,13 @@ public class registrot extends javax.swing.JPanel {
      public void cargarDatos() throws SQLException {
 
         jtModelo = cn.obtenerDatos();
-        this.tablaEC.setModel(jtModelo);
-        this.tablaEC.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        JTableModel2 = cn2.obtenerDatos();
-        this.tablaLB.setModel(JTableModel2);
+        this.tablaLB.setModel(jtModelo);
         this.tablaLB.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        
+        
+        JTableModel2 = cn2.obtenerDatos();
+        this.tablaEC.setModel(JTableModel2);
+        this.tablaEC.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
         
         
