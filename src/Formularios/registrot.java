@@ -452,7 +452,7 @@ public class registrot extends javax.swing.JPanel {
         });
 
         jLabel11.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
-        jLabel11.setText("Saldo segun libro de bancos");
+        jLabel11.setText("Saldo segun  Estado de cuenta");
 
         javax.swing.GroupLayout panelECLayout = new javax.swing.GroupLayout(panelEC);
         panelEC.setLayout(panelECLayout);
@@ -464,7 +464,7 @@ public class registrot extends javax.swing.JPanel {
                     .addGroup(panelECLayout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(totalEC, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(totalEC, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelECLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelECLayout.createSequentialGroup()
                             .addComponent(jLabel10)
@@ -478,7 +478,7 @@ public class registrot extends javax.swing.JPanel {
                             .addComponent(jLabel8)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(saldoIniciarEC, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelECLayout.setVerticalGroup(
             panelECLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -630,10 +630,10 @@ public class registrot extends javax.swing.JPanel {
                             .addComponent(jScrollPane2)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelLB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(panelLB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelEC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(40, 40, 40))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -659,9 +659,7 @@ public class registrot extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panelLB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 65, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -744,7 +742,7 @@ public class registrot extends javax.swing.JPanel {
         Connection cn = cc.conectar();
         int cont = 0;
         String consult = "insert into librobanco(op,saldoinicial,cargo,abono,descrip,fecha) values(?,?,?,?,?,?)";
-        String consult2 ="insert into librobanco(op,saldoinicial,cargo,abono,descrip,fecha) values(?,?,?,?,?,?)";
+        String consult2 ="insert into estadocuenta(op,saldoinicial,cargo,abono,descrip,fecha) values(?,?,?,?,?,?)";
 
        
         //insertamos en la base en tabla LB
@@ -781,7 +779,7 @@ public class registrot extends javax.swing.JPanel {
                         ps.executeUpdate();
 
                     }
-                    JOptionPane.showMessageDialog(null, "Cambios guardados con exito.", "Con exito", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Cambios guardados con exito. EC", "Con exito", JOptionPane.INFORMATION_MESSAGE);
 
                 }
 
@@ -803,26 +801,26 @@ public class registrot extends javax.swing.JPanel {
                         vCargo = (String) tablaLB.getValueAt(i, 3);
                         vAbono = (String) tablaLB.getValueAt(i, 4);
 
-                        PreparedStatement ps = cn.prepareStatement(consult2);
+                        PreparedStatement ps1 = cn.prepareStatement(consult2);
                         
   
      
-                            ps.setInt(1, Integer.parseInt(vNP));
-                            ps.setDouble(2, Double.parseDouble(vSaldoi));
-                            ps.setDouble(3, Double.parseDouble(vCargo));
-                            ps.setDouble(4, Double.parseDouble(vAbono));
-                            ps.setString(5, vDescriP);
-                            ps.setString(6, vFecha);
+                            ps1.setInt(1, Integer.parseInt(vNP));
+                            ps1.setDouble(2, Double.parseDouble(vSaldoi));
+                            ps1.setDouble(3, Double.parseDouble(vCargo));
+                            ps1.setDouble(4, Double.parseDouble(vAbono));
+                            ps1.setString(5, vDescriP);
+                            ps1.setString(6, vFecha);
 
                        
 
 
 
                  
-                        ps.executeUpdate();
+                        ps1.executeUpdate();
 
                     }
-                    JOptionPane.showMessageDialog(null, "Cambios guardados con exito.", "Con exito", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Cambios guardados con exito. LB", "Con exito", JOptionPane.INFORMATION_MESSAGE);
 
                 }
 
