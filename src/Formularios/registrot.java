@@ -33,7 +33,9 @@ public class registrot extends javax.swing.JPanel {
     AsientoModel cn;
     AsientoModel2 cn2;
     int contador=0;
+    double contador1,contador2,contador3,contador4;
 
+    
     public registrot() throws SQLException{
         initComponents();
             cn = new AsientoModel();
@@ -47,6 +49,7 @@ public class registrot extends javax.swing.JPanel {
 
         
     }
+    //cargamos tablas desde db
      public void cargarDatos() throws SQLException {
 
         jtModelo = cn.obtenerDatos();
@@ -62,6 +65,7 @@ public class registrot extends javax.swing.JPanel {
         
 
     }
+     //validamos que ingresen bonos o saldos de forma corretxta
     public void cargoabono(){
         if(cargoB.isSelected()==true){
                 cargoJ.setEnabled(true);
@@ -77,6 +81,8 @@ public class registrot extends javax.swing.JPanel {
         }
         
     }
+    
+    //limpio datos de ingreso
     public void limpiarjtex() {
 
         this.Descrip.setText("");
@@ -104,6 +110,7 @@ public class registrot extends javax.swing.JPanel {
         }
     }
     
+    //procesamos datop en la tablas
     public void procesar(){
         double sumA = 0, sumC = 0,saldoInicial=0;
 
@@ -120,7 +127,7 @@ public class registrot extends javax.swing.JPanel {
         this.abonosEC.setText(""+sumA);
         this.cargosEC.setText(""+sumC);
         this.saldoIniciarEC.setText(""+saldoInicial);
-        Double VTotalEC=saldoInicial+sumA-sumC;
+        Double VTotalEC=saldoInicial+sumC-sumA;
         this.totalEC.setText(""+VTotalEC);
         
         sumA = 0;
@@ -146,6 +153,117 @@ public class registrot extends javax.swing.JPanel {
         this.TotalLB.setText(""+VTotalLB);
         System.out.println("terminamos bien");
         
+    
+    }
+    //cuando limpiamos habilita inic
+    public void InicioDinamico(){
+            this.LBA.setVisible(false);
+            this.ECB.setVisible(false);
+            this.IniciarB.setEnabled(true);
+            this.Saldoi.setEnabled(true);
+            this.labelSI.setEnabled(true);
+    
+    }
+    public void LimpiarTablas(){
+        
+            for (int i = 0; i < tablaLB.getRowCount(); i++) {
+                jtModelo.removeRow(i);
+                i-=1;
+            }
+            for (int i = 0; i < tablaEC.getRowCount(); i++) {
+                JTableModel2.removeRow(i);
+                i-=1;
+            }
+            
+//            tablaLB.setModel(new DefaultTableModel());
+//            tablaEC.setModel(new DefaultTableModel());
+        
+    
+    }
+    
+    public void conci(){
+        for (int i = 0; i < this.tablaLB.getRowCount(); i++) {
+            for (int j = 0; j < this.tablaEC.getRowCount(); j++) {
+                if ((this.tablaLB.getValueAt(i, 0).equals(this.tablaEC.getValueAt(j, 0))) && (this.tablaLB.getValueAt(i, 4).equals(this.tablaEC.getValueAt(j, 4)) && (this.tablaLB.getValueAt(i, 3).equals(this.tablaEC.getValueAt(j, 3))))) {
+                    this.tablaLB.setValueAt("Sí", i, 6);
+                    this.tablaEC.setValueAt("Sí", j, 6);
+                    break;
+                } else {
+                    if (Float.parseFloat(this.tablaLB.getValueAt(i, 4).toString()) > 0) {
+                        this.tablaLB.setValueAt(1, i, 6);
+                        
+                    } else if (Float.parseFloat(this.tablaLB.getValueAt(i, 3).toString()) > 0) {
+                        this.tablaLB.setValueAt(2, i, 6);
+
+                    }
+
+                }
+
+            }
+
+        }
+        for (int i = 0; i < this.tablaEC.getRowCount(); i++) {
+            for (int j = 0; j < this.tablaLB.getRowCount(); j++) {
+                if ((this.tablaEC.getValueAt(i, 0).equals(this.tablaLB.getValueAt(j, 0))) && (this.tablaEC.getValueAt(i, 4).equals(this.tablaLB.getValueAt(j, 4)) && (this.tablaEC.getValueAt(i, 3).equals(this.tablaLB.getValueAt(j, 3))))) {
+                    this.tablaLB.setValueAt("Sí", i, 6);
+                    this.tablaEC.setValueAt("Sí", j, 6);
+                    break;
+                } else {
+                    if (Float.parseFloat(this.tablaEC.getValueAt(i, 4).toString()) > 0) {
+                        this.tablaEC.setValueAt(3, i, 6);
+                    } else if (Float.parseFloat(this.tablaEC.getValueAt(i, 3).toString()) > 0) {
+                        this.tablaEC.setValueAt(4, i, 6);
+
+                    }
+
+
+                }
+
+            }
+
+        }
+        
+        for (int i = 0; i < this.tablaLB.getRowCount(); i++) {
+            if(this.tablaLB.getValueAt(i, 6).toString()!="Sí"){
+                 if(Float.parseFloat(this.tablaLB.getValueAt(i, 6).toString()) == 1){
+                System.out.println("entre aca");
+                contador1+=Float.parseFloat(this.tablaLB.getValueAt(i, 4).toString());
+            }
+            else if(Float.parseFloat(this.tablaLB.getValueAt(i, 6).toString()) == 2){
+                                System.out.println("entre aca");
+
+                contador2+=Float.parseFloat(this.tablaLB.getValueAt(i, 3).toString());
+                
+            }
+            }
+           
+        
+        }
+       
+
+        for (int i = 0; i < this.tablaEC.getRowCount(); i++) {
+                    if(this.tablaEC.getValueAt(i, 6).toString()!="Sí"){
+                 if(Float.parseFloat(this.tablaEC.getValueAt(i, 6).toString()) == 3){
+                System.out.println("entre aca");
+                contador3+=Float.parseFloat(this.tablaEC.getValueAt(i, 4).toString());
+            }
+            else if(Float.parseFloat(this.tablaEC.getValueAt(i, 6).toString()) == 4){
+                                System.out.println("entre aca");
+
+                contador4+=Float.parseFloat(this.tablaEC.getValueAt(i, 3).toString());
+                
+            }
+            }
+        
+        }
+        System.out.println("El valor de los 1 es:"+contador1);
+        System.out.println("El valor de los 2 es:"+contador2);
+         System.out.println("El valor de los 3 es:"+contador3);
+        System.out.println("El valor de los 4 es:"+contador4);
+        
+        
+    
+    
     
     }
 
@@ -205,6 +323,8 @@ public class registrot extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setAlignmentX(0.0F);
@@ -564,15 +684,25 @@ public class registrot extends javax.swing.JPanel {
 
         jButton1.setFont(new java.awt.Font("Roboto Medium", 0, 11)); // NOI18N
         jButton1.setText("Limpiar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Roboto Medium", 0, 11)); // NOI18N
         jButton2.setText("Exportar CSV");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton5.setFont(new java.awt.Font("Roboto Medium", 0, 11)); // NOI18N
         jButton5.setText("Generar informe");
 
         jButton6.setFont(new java.awt.Font("Roboto Medium", 0, 11)); // NOI18N
-        jButton6.setText("No se boton");
+        jButton6.setText("Bancos");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -611,6 +741,10 @@ public class registrot extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel2.setText("Libro Banco");
+
+        jLabel13.setText("Libro Estado de cuenta");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -618,6 +752,9 @@ public class registrot extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1oc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
@@ -628,7 +765,10 @@ public class registrot extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(panelLB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -649,7 +789,9 @@ public class registrot extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -658,9 +800,12 @@ public class registrot extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panelLB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 65, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         jPanel1oc.getAccessibleContext().setAccessibleName("");
@@ -834,6 +979,7 @@ public class registrot extends javax.swing.JPanel {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         this.procesar();
+        this.conci();
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -911,7 +1057,7 @@ public class registrot extends javax.swing.JPanel {
                     btn2.setName("e");
 
                     JTableModel2.addRow(new Object[]{
-                        vNP, vFecha,vDescriP, vCargo,vAbono,"0"
+                        vNP, vFecha,vDescriP, vAbono,vCargo,"0"
                     });
                     this.limpiarjtex();
 
@@ -919,6 +1065,68 @@ public class registrot extends javax.swing.JPanel {
         }    
         
     }//GEN-LAST:event_ECBActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        conector cc = new conector();
+        Connection cn = cc.conectar();
+        
+        //dropeamos ambas tablas 
+        String BorrarTablaLB = "DROP TABLE estadocuenta";
+        String BorrarTablaEC = "DROP TABLE librobanco";
+        String CreamosTablaLb = "CREATE TABLE \"estadoCuenta\" (\n" +
+                        "    \"op\" INTEGER PRIMARY KEY  NOT NULL ,\n" +
+                        "    \"saldoinicial\"REAL,\n" +
+                        "    \"cargo\" REAL,\n" +
+                        "    \"abono\" REAL,\n" +
+                        "    \"descrip\" TEXT NOT NULL,\n" +
+                        "    \"fecha\" TEXT NOT NULL\n" +
+                        "\n" +
+                            ")";
+        String CreamosTablaEC = "CREATE TABLE \"librobanco\" (\n" +
+                        "    \"op\" INTEGER PRIMARY KEY  NOT NULL ,\n" +
+                        "    \"saldoinicial\"REAL,\n" +
+                        "    \"cargo\" REAL,\n" +
+                        "    \"abono\" REAL,\n" +
+                        "    \"descrip\" TEXT NOT NULL,\n" +
+                        "    \"fecha\" TEXT NOT NULL\n" +
+                        "\n" +
+                            ")";
+        
+        try {
+           PreparedStatement psLB = cn.prepareStatement(BorrarTablaLB);
+           PreparedStatement psEC = cn.prepareStatement(BorrarTablaEC);
+           psLB.executeUpdate();
+           psEC.executeUpdate();
+           PreparedStatement ps1LB = cn.prepareStatement(CreamosTablaLb);
+           PreparedStatement ps1EC = cn.prepareStatement(CreamosTablaEC);
+           ps1LB.executeUpdate();
+           ps1EC.executeUpdate();
+           this.InicioDinamico();
+           this.LimpiarTablas();
+          
+           
+           
+        } catch (Exception e) {
+            
+        }
+
+        
+        
+        
+
+
+
+
+        
+        
+        //creamos ambas tablas
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -948,6 +1156,8 @@ public class registrot extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
