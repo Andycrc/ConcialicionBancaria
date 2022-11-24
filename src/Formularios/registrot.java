@@ -8,6 +8,16 @@ import Entidades.Render;
 import Conexion.conector;
 import Models.AsientoModel;
 import Models.AsientoModel2;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfWriter;
+import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +28,11 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -33,7 +48,7 @@ public class registrot extends javax.swing.JPanel {
     AsientoModel cn;
     AsientoModel2 cn2;
     int contador=0;
-    double contador1,contador2,contador3,contador4;
+    double contador1,contador2,contador3,contador4,FinalTot;
 
     
     public registrot() throws SQLException{
@@ -587,12 +602,13 @@ public class registrot extends javax.swing.JPanel {
                         .addComponent(totalEC, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelECLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelECLayout.createSequentialGroup()
-                            .addComponent(jLabel10)
+                            .addGap(1, 1, 1)
+                            .addComponent(jLabel9)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(abonosEC))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelECLayout.createSequentialGroup()
-                            .addComponent(jLabel9)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel10)
+                            .addGap(3, 3, 3)
                             .addComponent(cargosEC))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelECLayout.createSequentialGroup()
                             .addComponent(jLabel8)
@@ -610,11 +626,11 @@ public class registrot extends javax.swing.JPanel {
                 .addGap(6, 6, 6)
                 .addGroup(panelECLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cargosEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelECLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(abonosEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(abonosEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelECLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -691,7 +707,7 @@ public class registrot extends javax.swing.JPanel {
         });
 
         jButton2.setFont(new java.awt.Font("Roboto Medium", 0, 11)); // NOI18N
-        jButton2.setText("Exportar CSV");
+        jButton2.setText("Exportar PDF");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -1126,6 +1142,85 @@ public class registrot extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        this.procesar();
+        this.conci();
+        Document document = new Document();
+        try { 
+            PdfWriter writer = PdfWriter.getInstance(document,
+                    new FileOutputStream("Ejemplo_pdf_java.pdf"));
+            document.open();
+            PdfContentByte cb = writer.getDirectContent();
+            Graphics g = cb.createGraphicsShapes(PageSize.LETTER.getWidth(), PageSize.LETTER.getHeight());
+            
+                  //--------------------- pagina 1 --------------------------
+            g.setColor(Color.GREEN);
+            g.drawRect(1, 1, 593, 790);    
+            
+            g.setColor(new Color(154, 171, 237));
+            g.fillOval(290, 90, 280, 100);
+                        
+            Font font1 = new Font("Tahoma", Font.BOLD + Font.ITALIC, 35);
+            g.setFont(font1);
+
+            g.setColor(Color.RED);
+            g.drawString("Banco:", 150, 150);
+            
+            g.setColor(Color.WHITE);
+            g.drawString("Nombre", 290, 150);
+            g.setColor(Color.BLACK);
+            Font font2 = new Font("Tahoma", Font.PLAIN, 12);
+            g.setFont(font2);
+            g.drawString("Saldo Según libros de bancos:", 50, 200);
+            g.drawString(""+ this.TotalLB.getText(), 230, 200);
+            
+            g.drawString("1-Depositos no abonados:", 50, 220);
+            g.drawString(""+contador1,200,220);
+            g.drawString("2+Cheques no cobrados:", 50, 240);
+            g.drawString(""+contador2,200,240);
+
+            g.drawString("3-Nota de cargo no considerada libro en banco:", 50, 260);
+            g.drawString(""+contador3,330,260);
+
+            g.drawString("4+Nota de abono no considerada libro en banco:", 50, 280);
+            g.drawString(""+contador4,330,280);
+            double saldosegunbanco=Double.parseDouble(this.TotalLB.getText());
+            FinalTot=(saldosegunbanco+contador1-contador2+contador3+contador4);
+            g.drawString("Saldo de cueta validado:", 50, 320);
+            g.drawString(""+FinalTot,200,320);
+
+
+
+
+            
+            
+            
+          
+            
+            Font font3 = new Font("Tahoma", Font.PLAIN, 15);
+            g.setFont(font3);
+            g.setColor(Color.BLACK);
+            g.drawString("Escanea el código QR para visitar la lista de reproducción de YouTube", 60, 460);
+            g.drawString("del curso de GUI en Java", 210, 480);
+            
+           
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(registrot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(registrot.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        document.close();
+
+        JOptionPane.showMessageDialog(null, 
+                "Se creo el archivo 'Ejemplo_pdf_java.pdf' en la carpeta del proyecto");
+        try{
+            File path = new File ("Ejemplo_pdf_java.pdf");
+            Desktop.getDesktop().open(path);
+            
+        }catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
