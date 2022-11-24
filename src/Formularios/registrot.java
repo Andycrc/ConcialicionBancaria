@@ -343,8 +343,6 @@ public class registrot extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
 
@@ -731,29 +729,18 @@ public class registrot extends javax.swing.JPanel {
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Roboto Medium", 0, 11)); // NOI18N
-        jButton5.setText("Generar informe");
-
-        jButton6.setFont(new java.awt.Font("Roboto Medium", 0, 11)); // NOI18N
-        jButton6.setText("Bancos");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -762,12 +749,8 @@ public class registrot extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton1)
-                    .addComponent(jButton5))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton6))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         jLabel2.setText("Libro Banco");
@@ -1240,14 +1223,27 @@ public class registrot extends javax.swing.JPanel {
             document.add(nexo);
             document.add(Separador);
             document.add(nexo1);
+            document.add(Separador);
             
-            PdfPTable t1 = new PdfPTable(6);
+            PdfPTable t1 = new PdfPTable(4);
             t1.addCell("Numero de op");
             t1.addCell("Fecha");
             t1.addCell("Descripcion");
             t1.addCell("Cargo");
+            for (int i = 0; i < tablaLB.getRowCount(); i++) {
+                if(this.tablaEC.getValueAt(i, 6).toString()!="Conciliado"){
+                 if(Float.parseFloat(this.tablaLB.getValueAt(i, 6).toString()) == 1){
+                    t1.addCell((String) tablaLB.getValueAt(i, 0));
+                    t1.addCell((String) tablaLB.getValueAt(i, 1));
+                    t1.addCell(tablaLB.getValueAt(i, 2).toString());
+                    t1.addCell(tablaLB.getValueAt(i, 3).toString());
+                 }
+                }
+
+
+            }
             document.add(t1);
-            PdfPTable t2 = new PdfPTable(6);
+            PdfPTable t2 = new PdfPTable(4);
             document.add(Separador);
             document.add(nexo2);
             document.add(Separador);
@@ -1255,8 +1251,21 @@ public class registrot extends javax.swing.JPanel {
             t2.addCell("Fecha");
             t2.addCell("Descripcion");
             t2.addCell("abonos");
+            for (int i = 0; i < tablaLB.getRowCount(); i++) {
+                  if(this.tablaEC.getValueAt(i, 6).toString()!="Conciliado"){
+                    if(Float.parseFloat(this.tablaLB.getValueAt(i, 6).toString()) == 2){
+                     t2.addCell((String) tablaLB.getValueAt(i, 0));
+                     t2.addCell((String) tablaLB.getValueAt(i, 1));
+                     t2.addCell(tablaLB.getValueAt(i, 2).toString());
+                     t2.addCell(tablaLB.getValueAt(i, 3).toString());
+                    }
+                  
+                  }
+   
+
+            }
             document.add(t2);
-            PdfPTable t3 = new PdfPTable(6);
+            PdfPTable t3 = new PdfPTable(4);
             document.add(Separador);
             document.add(nexo3);
             document.add(Separador);
@@ -1264,16 +1273,44 @@ public class registrot extends javax.swing.JPanel {
             t3.addCell("Fecha");
             t3.addCell("Descripcion");
             t3.addCell("cargos");
+            for (int i = 0; i < tablaEC.getRowCount(); i++) {
+                 if(this.tablaEC.getValueAt(i, 6).toString()!="Conciliado"){
+                   if(Float.parseFloat(this.tablaEC.getValueAt(i, 6).toString()) == 3){
+                     t3.addCell((String) tablaEC.getValueAt(i, 0));
+                     t3.addCell((String) tablaEC.getValueAt(i, 1));
+                     t3.addCell(tablaEC.getValueAt(i, 2).toString());
+                     t3.addCell(tablaEC.getValueAt(i, 4).toString());
+                    }
+                 
+                 }
+
+
+            }
             document.add(t3);
 
-            PdfPTable t4 = new PdfPTable(6);
+            PdfPTable t4 = new PdfPTable(4);
             document.add(Separador);
             document.add(nexo4);
             document.add(Separador);
             t4.addCell("Numero de op");
             t4.addCell("Fecha");
             t4.addCell("Descripcion");
-            t4.addCell("cargos");
+            t4.addCell("abonos");
+            for (int i = 0; i < tablaEC.getRowCount(); i++) {
+                 if(this.tablaEC.getValueAt(i, 6).toString()!="Conciliado"){
+                    if(Float.parseFloat(this.tablaEC.getValueAt(i, 6).toString()) == 4){
+                     t4.addCell((String) tablaEC.getValueAt(i, 0));
+                     t4.addCell((String) tablaEC.getValueAt(i, 1));
+                     t4.addCell(tablaEC.getValueAt(i, 2).toString());
+                     t4.addCell(tablaEC.getValueAt(i, 3).toString());
+                     }
+                 
+                 
+                 }
+
+
+            }
+            
             document.add(t4);
 
             
@@ -1475,8 +1512,6 @@ public class registrot extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
