@@ -44,7 +44,7 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="335" max="-2" attributes="0"/>
               <Component id="Menu" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="339" max="32767" attributes="0"/>
+              <EmptySpace pref="350" max="32767" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Component id="Header" min="-2" max="-2" attributes="0"/>

@@ -36,7 +36,7 @@ public class AsientoModel {
            
             
         
-        String[] columnNames = {"N op°","fecha","descripcion","cargo", "abono" , "saldo","eliminar"};
+        String[] columnNames = {"N op°","fecha","descripcion","cargo", "abono" , "saldo","estado"};
         model.setColumnIdentifiers(columnNames);
         // Código a ejecutar si no hay errores
         String sql = "SELECT " +

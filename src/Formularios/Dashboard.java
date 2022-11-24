@@ -287,7 +287,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(335, 335, 335)
                 .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(339, Short.MAX_VALUE))
+                .addContainerGap(350, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -331,7 +331,7 @@ public class Dashboard extends javax.swing.JFrame {
         registrot rg;
         try {
         rg = new registrot();
-        rg.setSize(1100,600);
+        rg.setSize(1100,610);
         contenedor.removeAll();
         contenedor.add(rg, BorderLayout.CENTER);
         contenedor.revalidate();

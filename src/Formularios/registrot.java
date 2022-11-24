@@ -200,8 +200,8 @@ public class registrot extends javax.swing.JPanel {
         for (int i = 0; i < this.tablaLB.getRowCount(); i++) {
             for (int j = 0; j < this.tablaEC.getRowCount(); j++) {
                 if ((this.tablaLB.getValueAt(i, 0).equals(this.tablaEC.getValueAt(j, 0))) && (this.tablaLB.getValueAt(i, 4).equals(this.tablaEC.getValueAt(j, 4)) && (this.tablaLB.getValueAt(i, 3).equals(this.tablaEC.getValueAt(j, 3))))) {
-                    this.tablaLB.setValueAt("Sí", i, 6);
-                    this.tablaEC.setValueAt("Sí", j, 6);
+                    this.tablaLB.setValueAt("Conciliado", i, 6);
+                    this.tablaEC.setValueAt("Conciliado", j, 6);
                     break;
                 } else {
                     if (Float.parseFloat(this.tablaLB.getValueAt(i, 4).toString()) > 0) {
@@ -220,8 +220,8 @@ public class registrot extends javax.swing.JPanel {
         for (int i = 0; i < this.tablaEC.getRowCount(); i++) {
             for (int j = 0; j < this.tablaLB.getRowCount(); j++) {
                 if ((this.tablaEC.getValueAt(i, 0).equals(this.tablaLB.getValueAt(j, 0))) && (this.tablaEC.getValueAt(i, 4).equals(this.tablaLB.getValueAt(j, 4)) && (this.tablaEC.getValueAt(i, 3).equals(this.tablaLB.getValueAt(j, 3))))) {
-                    this.tablaLB.setValueAt("Sí", i, 6);
-                    this.tablaEC.setValueAt("Sí", j, 6);
+                    this.tablaLB.setValueAt("Conciliado", i, 6);
+                    this.tablaEC.setValueAt("Conciliado", j, 6);
                     break;
                 } else {
                     if (Float.parseFloat(this.tablaEC.getValueAt(i, 4).toString()) > 0) {
@@ -239,7 +239,7 @@ public class registrot extends javax.swing.JPanel {
         }
         
         for (int i = 0; i < this.tablaLB.getRowCount(); i++) {
-            if(this.tablaLB.getValueAt(i, 6).toString()!="Sí"){
+            if(this.tablaLB.getValueAt(i, 6).toString()!="Conciliado"){
                  if(Float.parseFloat(this.tablaLB.getValueAt(i, 6).toString()) == 1){
                 System.out.println("entre aca");
                 contador1+=Float.parseFloat(this.tablaLB.getValueAt(i, 4).toString());
@@ -257,7 +257,7 @@ public class registrot extends javax.swing.JPanel {
        
 
         for (int i = 0; i < this.tablaEC.getRowCount(); i++) {
-                    if(this.tablaEC.getValueAt(i, 6).toString()!="Sí"){
+                    if(this.tablaEC.getValueAt(i, 6).toString()!="Conciliado"){
                  if(Float.parseFloat(this.tablaEC.getValueAt(i, 6).toString()) == 3){
                 System.out.println("entre aca");
                 contador3+=Float.parseFloat(this.tablaEC.getValueAt(i, 4).toString());
@@ -498,7 +498,7 @@ public class registrot extends javax.swing.JPanel {
         jScrollPane3.setViewportView(tablaLB);
 
         panelLB.setBackground(new java.awt.Color(255, 255, 255));
-        panelLB.setBorder(javax.swing.BorderFactory.createTitledBorder("Resumen de datos"));
+        panelLB.setBorder(javax.swing.BorderFactory.createTitledBorder("Resume Libro Banco"));
         panelLB.setFont(new java.awt.Font("Roboto Medium", 0, 11)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
@@ -529,7 +529,7 @@ public class registrot extends javax.swing.JPanel {
                     .addGroup(panelLBLayout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TotalLB, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(TotalLB, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelLBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelLBLayout.createSequentialGroup()
                             .addComponent(jLabel6)
@@ -543,7 +543,7 @@ public class registrot extends javax.swing.JPanel {
                             .addGroup(panelLBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(saldosLb, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                                 .addComponent(cargoslb)))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 34, Short.MAX_VALUE))
         );
         panelLBLayout.setVerticalGroup(
             panelLBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -568,7 +568,7 @@ public class registrot extends javax.swing.JPanel {
         );
 
         panelEC.setBackground(new java.awt.Color(255, 255, 255));
-        panelEC.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Resumen de datos")));
+        panelEC.setBorder(javax.swing.BorderFactory.createTitledBorder("Resumen Estado de cuenta"));
         panelEC.setFont(new java.awt.Font("Roboto Medium", 0, 11)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Roboto Light", 0, 12)); // NOI18N
@@ -614,7 +614,7 @@ public class registrot extends javax.swing.JPanel {
                             .addComponent(jLabel8)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(saldoIniciarEC, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
         panelECLayout.setVerticalGroup(
             panelECLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -766,30 +766,34 @@ public class registrot extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
                         .addComponent(jPanel1oc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(panelLB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelEC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(40, 40, 40))))
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel13)
+                                .addGap(537, 537, 537)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelLB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panelEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(82, 82, 82)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -805,25 +809,23 @@ public class registrot extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(panelEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelLB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(panelLB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
+        panelEC.getAccessibleContext().setAccessibleName("");
         jPanel1oc.getAccessibleContext().setAccessibleName("");
 
         getAccessibleContext().setAccessibleParent(this);
@@ -1184,7 +1186,10 @@ public class registrot extends javax.swing.JPanel {
             g.drawString("4+Nota de abono no considerada libro en banco:", 50, 280);
             g.drawString(""+contador4,330,280);
             double saldosegunbanco=Double.parseDouble(this.TotalLB.getText());
-            FinalTot=(saldosegunbanco+contador1-contador2+contador3+contador4);
+            double resta,suma;
+            resta = contador1 + contador3;
+            suma = contador2 + contador4;
+            FinalTot=((saldosegunbanco+suma)-resta);
             g.drawString("Saldo de cueta validado:", 50, 320);
             g.drawString(""+FinalTot,200,320);
 
