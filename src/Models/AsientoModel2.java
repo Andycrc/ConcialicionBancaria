@@ -32,7 +32,7 @@ public class AsientoModel2 {
            
             
         
-        String[] columnNames = {"N op°","fecha","descripcion","abono", "cargo" , "saldo","estado"};
+        String[] columnNames = {"N op°","fecha","descripcion","abono", "cargo" , "saldo","estado","eliminar"};
         model.setColumnIdentifiers(columnNames);
         // Código a ejecutar si no hay errores
         String sql = "SELECT " +
@@ -61,11 +61,10 @@ public class AsientoModel2 {
 
                model.addRow(new Object[]{datos.getNP(), 
                    datos.getFechaop(),
-                   datos.getDesc(),
-                   datos.getCargo(),
-                   datos.getAbono(),
-                   datos.getFechaop(),
-                   datos.getSaldoi(),
+                   datos.getDesc(),                   
+                    datos.getAbono(),
+                   datos.getCargo(),                  
+                   datos.getSaldoi()
                          });
             }       
             return model;

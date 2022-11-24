@@ -36,7 +36,7 @@ public class AsientoModel {
            
             
         
-        String[] columnNames = {"N op°","fecha","descripcion","cargo", "abono" , "saldo","estado"};
+        String[] columnNames = {"N op°","fecha","descripcion","cargo", "abono" , "saldo","estado","eliminar"};
         model.setColumnIdentifiers(columnNames);
         // Código a ejecutar si no hay errores
         String sql = "SELECT " +
@@ -68,8 +68,7 @@ public class AsientoModel {
                    datos.getDesc(),
                    datos.getCargo(),
                    datos.getAbono(),
-                   datos.getFechaop(),
-                   datos.getSaldoi(),
+                   datos.getSaldoi()
                          });
             }       
             return model;

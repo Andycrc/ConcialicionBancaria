@@ -20,6 +20,7 @@ public class FrmMain extends javax.swing.JFrame {
      * Creates new form FrmMain
      */
     int xMouse, yMouse;
+    public static String usuario, empresa,banco;
     public FrmMain() {
         
         initComponents();
@@ -51,6 +52,9 @@ public class FrmMain extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        contra_label2 = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        jTextField2_banco = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -79,14 +83,14 @@ public class FrmMain extends javax.swing.JFrame {
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Avatar_Container.png"))); // NOI18N
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 80, -1, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Card_Header.png"))); // NOI18N
         jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, -1));
 
         usuario_label2.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         usuario_label2.setText("Usuario:");
-        jPanel4.add(usuario_label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
+        jPanel4.add(usuario_label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
 
         jTextField2_usuario2.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jTextField2_usuario2.setForeground(new java.awt.Color(51, 51, 51));
@@ -96,7 +100,7 @@ public class FrmMain extends javax.swing.JFrame {
                 jTextField2_usuario2_usuarioMousePressed(evt);
             }
         });
-        jPanel4.add(jTextField2_usuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 280, 40));
+        jPanel4.add(jTextField2_usuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 280, 40));
 
         jTextField2_empresa.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jTextField2_empresa.setForeground(new java.awt.Color(51, 51, 51));
@@ -106,13 +110,13 @@ public class FrmMain extends javax.swing.JFrame {
                 jTextField2_empresa_usuarioMousePressed(evt);
             }
         });
-        jPanel4.add(jTextField2_empresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 280, 40));
+        jPanel4.add(jTextField2_empresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 280, 40));
 
         contra_label1.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         contra_label1.setText("Empresa:");
-        jPanel4.add(contra_label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
-        jPanel4.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 280, 10));
-        jPanel4.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 280, 10));
+        jPanel4.add(contra_label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
+        jPanel4.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 280, 10));
+        jPanel4.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 280, 10));
 
         jPanel3.setBackground(new java.awt.Color(0, 139, 190));
         jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -137,7 +141,7 @@ public class FrmMain extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -146,7 +150,7 @@ public class FrmMain extends javax.swing.JFrame {
             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, 130, 40));
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, 130, 40));
 
         jPanel6.setBackground(new java.awt.Color(0, 139, 190));
         jPanel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -180,7 +184,22 @@ public class FrmMain extends javax.swing.JFrame {
             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 130, -1));
+        jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 130, -1));
+
+        contra_label2.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        contra_label2.setText("Banco:");
+        jPanel4.add(contra_label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, -1, -1));
+        jPanel4.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 280, 10));
+
+        jTextField2_banco.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        jTextField2_banco.setForeground(new java.awt.Color(51, 51, 51));
+        jTextField2_banco.setBorder(null);
+        jTextField2_banco.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextField2_banco_usuarioMousePressed(evt);
+            }
+        });
+        jPanel4.add(jTextField2_banco, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 280, 40));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Card_Content.png"))); // NOI18N
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 450, 380));
@@ -202,7 +221,11 @@ public class FrmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseEntered
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-
+        
+        usuario = this.jTextField2_usuario2.getText();
+        empresa = this.jTextField2_empresa.getText();
+        banco = this.jTextField2_banco.getText();
+        
         Dashboard menu = new Dashboard();
         menu.setVisible(true);
         this.setVisible(false);
@@ -268,6 +291,10 @@ public class FrmMain extends javax.swing.JFrame {
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_formMouseDragged
 
+    private void jTextField2_banco_usuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2_banco_usuarioMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2_banco_usuarioMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -305,6 +332,7 @@ public class FrmMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel contra_label1;
+    private javax.swing.JLabel contra_label2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -316,6 +344,8 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JTextField jTextField2_banco;
     private javax.swing.JTextField jTextField2_empresa;
     private javax.swing.JTextField jTextField2_usuario2;
     private javax.swing.JLabel usuario_label2;

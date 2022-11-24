@@ -8,10 +8,18 @@ import Entidades.Render;
 import Conexion.conector;
 import Models.AsientoModel;
 import Models.AsientoModel2;
+import com.lowagie.text.Anchor;
+import com.lowagie.text.Chapter;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
 import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.Section;
 import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -115,10 +123,9 @@ public class registrot extends javax.swing.JPanel {
             
         }else{
             this.procesar();
+            this.IniciarB.setEnabled(false);
             this.Saldoi.setEnabled(false);
-            this.Saldoi.setVisible(false);
-            this.IniciarB.setVisible(false);
-            this.labelSI.setVisible(false);
+            this.labelSI.setEnabled(false);
            
 
             
@@ -159,14 +166,12 @@ public class registrot extends javax.swing.JPanel {
             sumC = sumC + Double.valueOf((String) tablaLB.getValueAt(i, 3));
 
         }
-        System.out.println("llegue hasta aqui");
            //DATOS FINALES TABLA LB
         this.abonoslb.setText(""+sumA);
         this.cargoslb.setText(""+sumC);
         this.saldosLb.setText(""+saldoInicial);
         Double VTotalLB= saldoInicial+sumA-sumC;
         this.TotalLB.setText(""+VTotalLB);
-        System.out.println("terminamos bien");
         
     
     }
@@ -177,6 +182,12 @@ public class registrot extends javax.swing.JPanel {
             this.IniciarB.setEnabled(true);
             this.Saldoi.setEnabled(true);
             this.labelSI.setEnabled(true);
+            this.Saldoi.setVisible(true);
+            this.labelSI.setVisible(true);
+            this.IniciarB.setVisible(true);
+
+
+            
     
     }
     public void LimpiarTablas(){
@@ -241,11 +252,9 @@ public class registrot extends javax.swing.JPanel {
         for (int i = 0; i < this.tablaLB.getRowCount(); i++) {
             if(this.tablaLB.getValueAt(i, 6).toString()!="Conciliado"){
                  if(Float.parseFloat(this.tablaLB.getValueAt(i, 6).toString()) == 1){
-                System.out.println("entre aca");
                 contador1+=Float.parseFloat(this.tablaLB.getValueAt(i, 4).toString());
             }
             else if(Float.parseFloat(this.tablaLB.getValueAt(i, 6).toString()) == 2){
-                                System.out.println("entre aca");
 
                 contador2+=Float.parseFloat(this.tablaLB.getValueAt(i, 3).toString());
                 
@@ -259,7 +268,6 @@ public class registrot extends javax.swing.JPanel {
         for (int i = 0; i < this.tablaEC.getRowCount(); i++) {
                     if(this.tablaEC.getValueAt(i, 6).toString()!="Conciliado"){
                  if(Float.parseFloat(this.tablaEC.getValueAt(i, 6).toString()) == 3){
-                System.out.println("entre aca");
                 contador3+=Float.parseFloat(this.tablaEC.getValueAt(i, 4).toString());
             }
             else if(Float.parseFloat(this.tablaEC.getValueAt(i, 6).toString()) == 4){
@@ -271,11 +279,11 @@ public class registrot extends javax.swing.JPanel {
             }
         
         }
-        System.out.println("El valor de los 1 es:"+contador1);
-        System.out.println("El valor de los 2 es:"+contador2);
-         System.out.println("El valor de los 3 es:"+contador3);
-        System.out.println("El valor de los 4 es:"+contador4);
-        
+//        System.out.println("El valor de los 1 es:"+contador1);
+//        System.out.println("El valor de los 2 es:"+contador2);
+//         System.out.println("El valor de los 3 es:"+contador3);
+//        System.out.println("El valor de los 4 es:"+contador4);
+//        
         
     
     
@@ -333,7 +341,6 @@ public class registrot extends javax.swing.JPanel {
         labelSI = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -355,8 +362,17 @@ public class registrot extends javax.swing.JPanel {
                 "Numero op", "Fecha ", "Descripcion", "Cargo", "Abono", "Saldo", "Eliminar"
             }
         ));
+        tablaEC.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tablaEC.setGridColor(new java.awt.Color(255, 255, 255));
+        tablaEC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaECMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaEC);
+        if (tablaEC.getColumnModel().getColumnCount() > 0) {
+            tablaEC.getColumnModel().getColumn(0).setPreferredWidth(50);
+        }
 
         panel1.setBackground(new java.awt.Color(255, 255, 255));
         panel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -491,11 +507,20 @@ public class registrot extends javax.swing.JPanel {
 
             },
             new String [] {
-                "No.op", "Fecha op.", "Desc", "Cargo", "Abono", "Saldo", "Eliminar"
+                "No.op", "Fecha op.", "Desc", "Cargo", "Abono", "Saldo", "Estado"
             }
         ));
+        tablaLB.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tablaLB.setGridColor(new java.awt.Color(255, 255, 255));
+        tablaLB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaLBMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tablaLB);
+        if (tablaLB.getColumnModel().getColumnCount() > 0) {
+            tablaLB.getColumnModel().getColumn(0).setPreferredWidth(50);
+        }
 
         panelLB.setBackground(new java.awt.Color(255, 255, 255));
         panelLB.setBorder(javax.swing.BorderFactory.createTitledBorder("Resume Libro Banco"));
@@ -683,18 +708,10 @@ public class registrot extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jButton3.setFont(new java.awt.Font("Roboto Medium", 0, 11)); // NOI18N
-        jButton3.setText("Guardar cambios");
+        jButton3.setText("Procesar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setFont(new java.awt.Font("Roboto Medium", 0, 11)); // NOI18N
-        jButton4.setText("Procesar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
             }
         });
 
@@ -726,20 +743,17 @@ public class registrot extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton5)))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -751,7 +765,6 @@ public class registrot extends javax.swing.JPanel {
                     .addComponent(jButton5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
                     .addComponent(jButton2)
                     .addComponent(jButton6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -780,19 +793,18 @@ public class registrot extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3)))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(33, 33, 33)
-                                .addComponent(jLabel13)
-                                .addGap(537, 537, 537)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel13))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane3))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(panelLB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(panelEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(82, 82, 82)))
+                        .addGap(30, 30, 30)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -843,7 +855,7 @@ public class registrot extends javax.swing.JPanel {
         //VALIDACIONES DEL INGRESO DE DATOS A LAS TABLAS
         if(fechFC.getDate()==null ||(Descrip.getText().trim().length() == 0) 
                 || (vCargo.trim().length()==0) || (vAbono.trim().length()==0)|| (vNP.trim().length()==0)
-                || (vSaldoi.trim().length()==0)){
+                ){
             //MENSAJE SI ESTAN NULOS
              JOptionPane.showMessageDialog(null, "Por favor Complete los datos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
 
@@ -851,7 +863,8 @@ public class registrot extends javax.swing.JPanel {
         }
         else{
             //renderizamos boton eleminar
-             tablaLB.setDefaultRenderer(Object.class, new Render());
+            tablaLB.setDefaultRenderer(Object.class, new Render());
+
 
             
             
@@ -873,7 +886,7 @@ public class registrot extends javax.swing.JPanel {
                     btn2.setName("e");
 
                     jtModelo.addRow(new Object[]{
-                        vNP, vFecha,vDescriP, vCargo,vAbono,'0'
+                        vNP, vFecha,vDescriP, vCargo,vAbono,'0','0',btn2
                     });
                     this.limpiarjtex();
 
@@ -901,6 +914,8 @@ public class registrot extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        this.procesar();
+        this.conci();
         conector cc = new conector();
         Connection cn = cc.conectar();
         int cont = 0;
@@ -928,7 +943,12 @@ public class registrot extends javax.swing.JPanel {
   
      
                             ps.setInt(1, Integer.parseInt(vNP));
-                            ps.setDouble(2, Double.parseDouble(vSaldoi));
+                            if(tablaEC.getRowCount() > 0){
+                              ps.setDouble(2, 0);
+
+                            }else{
+                                ps.setDouble(2, Double.parseDouble(vSaldoi));
+                            }
                             ps.setDouble(3, Double.parseDouble(vCargo));
                             ps.setDouble(4, Double.parseDouble(vAbono));
                             ps.setString(5, vDescriP);
@@ -963,15 +983,24 @@ public class registrot extends javax.swing.JPanel {
                         vDescriP = (String) tablaLB.getValueAt(i, 2);
                         vCargo = (String) tablaLB.getValueAt(i, 3);
                         vAbono = (String) tablaLB.getValueAt(i, 4);
+                                                System.out.println(""+vNP+vFecha+vDescriP+vCargo+vAbono);
+
 
                         PreparedStatement ps1 = cn.prepareStatement(consult2);
                         
   
      
                             ps1.setInt(1, Integer.parseInt(vNP));
-                            ps1.setDouble(2, Double.parseDouble(vSaldoi));
+                            if(tablaLB.getRowCount() > 0){
+                              ps1.setDouble(2, 0);
+
+                            }else{
+                                ps1.setDouble(2, Double.parseDouble(vSaldoi));
+                            }
+                            
                             ps1.setDouble(3, Double.parseDouble(vCargo));
                             ps1.setDouble(4, Double.parseDouble(vAbono));
+
                             ps1.setString(5, vDescriP);
                             ps1.setString(6, vFecha);
 
@@ -986,20 +1015,13 @@ public class registrot extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Cambios guardados con exito. LB", "Con exito", JOptionPane.INFORMATION_MESSAGE);
 
                 }
-
+                this.jButton3.setEnabled(false);
             } catch (Exception e) {
 
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }
 
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        this.procesar();
-        this.conci();
-
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void IniciarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarBActionPerformed
         // TODO add your handling code here:
@@ -1045,7 +1067,7 @@ public class registrot extends javax.swing.JPanel {
         //VALIDACIONES DEL INGRESO DE DATOS A LAS TABLAS
         if(fechFC.getDate()==null ||(Descrip.getText().trim().length() == 0) 
                 || (vCargo.trim().length()==0) || (vAbono.trim().length()==0)|| (vNP.trim().length()==0)
-                || (vSaldoi.trim().length()==0)){
+                ){
             //MENSAJE SI ESTAN NULOS
              JOptionPane.showMessageDialog(null, "Por favor Complete los datos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
 
@@ -1075,7 +1097,7 @@ public class registrot extends javax.swing.JPanel {
                     btn2.setName("e");
 
                     JTableModel2.addRow(new Object[]{
-                        vNP, vFecha,vDescriP, vAbono,vCargo,"0"
+                        vNP, vFecha,vDescriP, vAbono,vCargo,"0","",btn2
                     });
                     this.limpiarjtex();
 
@@ -1090,38 +1112,40 @@ public class registrot extends javax.swing.JPanel {
         Connection cn = cc.conectar();
         
         //dropeamos ambas tablas 
-        String BorrarTablaLB = "DROP TABLE estadocuenta";
-        String BorrarTablaEC = "DROP TABLE librobanco";
-        String CreamosTablaLb = "CREATE TABLE \"estadoCuenta\" (\n" +
-                        "    \"op\" INTEGER PRIMARY KEY  NOT NULL ,\n" +
-                        "    \"saldoinicial\"REAL,\n" +
-                        "    \"cargo\" REAL,\n" +
-                        "    \"abono\" REAL,\n" +
-                        "    \"descrip\" TEXT NOT NULL,\n" +
-                        "    \"fecha\" TEXT NOT NULL\n" +
-                        "\n" +
-                            ")";
-        String CreamosTablaEC = "CREATE TABLE \"librobanco\" (\n" +
-                        "    \"op\" INTEGER PRIMARY KEY  NOT NULL ,\n" +
-                        "    \"saldoinicial\"REAL,\n" +
-                        "    \"cargo\" REAL,\n" +
-                        "    \"abono\" REAL,\n" +
-                        "    \"descrip\" TEXT NOT NULL,\n" +
-                        "    \"fecha\" TEXT NOT NULL\n" +
-                        "\n" +
-                            ")";
+        String BorrarTablaLB = "DELETE From estadocuenta";
+        String BorrarTablaEC = "DELETE From librobanco";
+//        String CreamosTablaLb = "CREATE TABLE \"estadoCuenta\" (\n" +
+//                        "    \"op\" INTEGER PRIMARY KEY  NOT NULL ,\n" +
+//                        "    \"saldoinicial\"REAL,\n" +
+//                        "    \"cargo\" REAL,\n" +
+//                        "    \"abono\" REAL,\n" +
+//                        "    \"descrip\" TEXT NOT NULL,\n" +
+//                        "    \"fecha\" TEXT NOT NULL\n" +
+//                        "\n" +
+//                            ")";
+//        String CreamosTablaEC = "CREATE TABLE \"librobanco\" (\n" +
+//                        "    \"op\" INTEGER PRIMARY KEY  NOT NULL ,\n" +
+//                        "    \"saldoinicial\"REAL,\n" +
+//                        "    \"cargo\" REAL,\n" +
+//                        "    \"abono\" REAL,\n" +
+//                        "    \"descrip\" TEXT NOT NULL,\n" +
+//                        "    \"fecha\" TEXT NOT NULL\n" +
+//                        "\n" +
+//                            ")";
         
         try {
+           
            PreparedStatement psLB = cn.prepareStatement(BorrarTablaLB);
            PreparedStatement psEC = cn.prepareStatement(BorrarTablaEC);
            psLB.executeUpdate();
            psEC.executeUpdate();
-           PreparedStatement ps1LB = cn.prepareStatement(CreamosTablaLb);
-           PreparedStatement ps1EC = cn.prepareStatement(CreamosTablaEC);
-           ps1LB.executeUpdate();
-           ps1EC.executeUpdate();
+//           PreparedStatement ps1LB = cn.prepareStatement(CreamosTablaLb);
+//           PreparedStatement ps1EC = cn.prepareStatement(CreamosTablaEC);
+//           ps1LB.executeUpdate();
+//           ps1EC.executeUpdate();
            this.InicioDinamico();
            this.LimpiarTablas();
+           this.jButton3.setEnabled(true);
           
            
            
@@ -1144,6 +1168,8 @@ public class registrot extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        FrmMain main = new FrmMain();
+        
         this.procesar();
         this.conci();
         Document document = new Document();
@@ -1160,15 +1186,22 @@ public class registrot extends javax.swing.JPanel {
             
             g.setColor(new Color(154, 171, 237));
             g.fillOval(290, 90, 280, 100);
+            Font font = new Font("Tahoma", Font.BOLD + Font.ITALIC, 12);
+            g.setFont(font);
+            g.setColor(Color.BLACK);
+            g.drawString("Usuario:"+main.usuario, 50, 20);
+            g.setColor(Color.BLACK);
+            g.drawString("Empresa:"+main.empresa, 50, 40);
+
                         
             Font font1 = new Font("Tahoma", Font.BOLD + Font.ITALIC, 35);
             g.setFont(font1);
-
+           
             g.setColor(Color.RED);
             g.drawString("Banco:", 150, 150);
             
             g.setColor(Color.WHITE);
-            g.drawString("Nombre", 290, 150);
+            g.drawString(""+main.banco, 290, 150);
             g.setColor(Color.BLACK);
             Font font2 = new Font("Tahoma", Font.PLAIN, 12);
             g.setFont(font2);
@@ -1193,31 +1226,177 @@ public class registrot extends javax.swing.JPanel {
             g.drawString("Saldo de cueta validado:", 50, 320);
             g.drawString(""+FinalTot,200,320);
 
-
-
-
-            
-            
-            
-          
             
             Font font3 = new Font("Tahoma", Font.PLAIN, 15);
-            g.setFont(font3);
-            g.setColor(Color.BLACK);
-            g.drawString("Escanea el código QR para visitar la lista de reproducción de YouTube", 60, 460);
-            g.drawString("del curso de GUI en Java", 210, 480);
+            document.newPage();
+            Paragraph nexo = new Paragraph("NEXOS:");
+            Paragraph nexo1 = new Paragraph("1-Depositos no abonados:");
+            Paragraph nexo2 = new Paragraph("2-Cheques no cobrados / Retiros no considerados en Bancos:");
+            Paragraph nexo3 = new Paragraph("3- Nota de Cargo no considerada en Libro Bancos (Contabilidad):");
+            Paragraph nexo4 = new Paragraph("4- Nota de Abono no considerada en Libro Bancos  (Contabilidad):");
+
+            Paragraph Separador = new Paragraph(" ");
+            document.add(Separador);
+            document.add(nexo);
+            document.add(Separador);
+            document.add(nexo1);
             
+            PdfPTable t1 = new PdfPTable(6);
+            t1.addCell("Numero de op");
+            t1.addCell("Fecha");
+            t1.addCell("Descripcion");
+            t1.addCell("Cargo");
+            document.add(t1);
+            PdfPTable t2 = new PdfPTable(6);
+            document.add(Separador);
+            document.add(nexo2);
+            document.add(Separador);
+            t2.addCell("Numero de op");
+            t2.addCell("Fecha");
+            t2.addCell("Descripcion");
+            t2.addCell("abonos");
+            document.add(t2);
+            PdfPTable t3 = new PdfPTable(6);
+            document.add(Separador);
+            document.add(nexo3);
+            document.add(Separador);
+            t3.addCell("Numero de op");
+            t3.addCell("Fecha");
+            t3.addCell("Descripcion");
+            t3.addCell("cargos");
+            document.add(t3);
+
+            PdfPTable t4 = new PdfPTable(6);
+            document.add(Separador);
+            document.add(nexo4);
+            document.add(Separador);
+            t4.addCell("Numero de op");
+            t4.addCell("Fecha");
+            t4.addCell("Descripcion");
+            t4.addCell("cargos");
+            document.add(t4);
+
+            
+            
+            
+
+            
+
+
+
+            
+
+      
+        document.newPage();
+        document.addTitle("TABLAS DE CONTENIDOS");
+        
+        Paragraph paragraph = new Paragraph("Tabla de libro bancario:");
+
+        document.add(Separador);
+        document.add(paragraph);
+                document.add(Separador);
+
+        PdfPTable tabla = new PdfPTable(6);
+        tabla.addCell("Numero de op");
+        tabla.addCell("Fecha");
+        tabla.addCell("Descripcion");
+        tabla.addCell("Cargo");
+        tabla.addCell("Abono");
+        tabla.addCell("saldo");
+            System.out.println(""+tablaLB.getRowCount());
+        for (int i = 0; i < tablaLB.getRowCount(); i++) {
+
+            
+            tabla.addCell((String) tablaLB.getValueAt(i, 0));
+            tabla.addCell((String) tablaLB.getValueAt(i, 1));
+            tabla.addCell(tablaLB.getValueAt(i, 2).toString());
+            tabla.addCell(tablaLB.getValueAt(i, 3).toString());
+            tabla.addCell(tablaLB.getValueAt(i, 4).toString());
+            tabla.addCell(tablaLB.getValueAt(i, 5).toString());
+
+        }
+        
+        document.add(tabla);
+        String lb1,lb2,lb3,lb4;
+        lb1=this.saldosLb.getText();
+        lb2 =this.cargoslb.getText();
+        lb3=this.abonoslb.getText();
+        lb4=this.TotalLB.getText();
+        Paragraph saldoInicLB = new Paragraph("Saldo Inicial: "+lb1);
+        Paragraph cargosLBP = new Paragraph("Total Cargos Libro bancos: "+lb2);
+        Paragraph abonosLBP = new Paragraph("Total abonos Libro bancos: "+lb3);
+        Paragraph totalLBP = new Paragraph("Total saldo segun Libro bancos: "+lb4);
+        
+        document.add(Separador);
+        document.add(saldoInicLB);
+         document.add(cargosLBP);
+          document.add(abonosLBP);
+           document.add(totalLBP);
+           document.add(Separador);
+
+
+        
+
+
+
+        PdfPTable tabla1 = new PdfPTable(6);
+        tabla1.addCell("Numero de op");
+        tabla1.addCell("Fecha");
+        tabla1.addCell("Descripcion");
+        tabla1.addCell("Cargo");
+        tabla1.addCell("Abono");
+        tabla1.addCell("saldo");
+        for (int i = 0; i < tablaEC.getRowCount(); i++) {
+                        
+            tabla1.addCell((String) tablaEC.getValueAt(i, 0));
+            tabla1.addCell((String) tablaEC.getValueAt(i, 1));
+            tabla1.addCell(tablaEC.getValueAt(i, 2).toString());
+            tabla1.addCell(tablaEC.getValueAt(i, 3).toString());
+            tabla1.addCell(tablaEC.getValueAt(i, 4).toString());
+            tabla1.addCell(tablaEC.getValueAt(i, 5).toString());
+        }
+        document.add(tabla1);
+        
+        String ec1,ec2,ec3,ec4;
+        ec1=this.saldoIniciarEC.getText();
+        ec2 =this.cargosEC.getText();
+        ec3 =this.abonosEC.getText();
+        ec4=this.totalEC.getText();
+
+        Paragraph saldoInicECP = new Paragraph("Saldo Inicial: "+ec1);
+        Paragraph cargosECP = new Paragraph("Total Cargos Libro bancos: "+ec2);
+        Paragraph abonosECP = new Paragraph("Total abonos Libro bancos: "+ec3);
+        Paragraph totalECP = new Paragraph("Total saldo segun Libro bancos: "+ec4);
+        
+        document.add(Separador);
+        document.add(saldoInicLB);
+         document.add(cargosECP);
+          document.add(abonosECP);
+           document.add(totalECP);
+           document.add(Separador);
+
+
+
+        
+   
+        
+        document.close();
            
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(registrot.class.getName()).log(Level.SEVERE, null, ex);
+            
         } catch (DocumentException ex) {
             Logger.getLogger(registrot.class.getName()).log(Level.SEVERE, null, ex);
         }
-        document.close();
+   
 
-        JOptionPane.showMessageDialog(null, 
-                "Se creo el archivo 'Ejemplo_pdf_java.pdf' en la carpeta del proyecto");
+
+      
+
+
+
+ 
         try{
             File path = new File ("Ejemplo_pdf_java.pdf");
             Desktop.getDesktop().open(path);
@@ -1227,6 +1406,53 @@ public class registrot extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tablaLBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaLBMouseClicked
+        // TODO add your handling code here:
+           int column = tablaLB.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / tablaLB.getRowHeight();
+
+        if (row < tablaLB.getRowCount() && row >= 0 && column < tablaLB.getColumnCount() && column >= 0) {
+            Object value = tablaLB.getValueAt(row, column);
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
+                JButton boton = (JButton) value;
+
+               
+                if (boton.getName().equals("e")) {
+                    int a = JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
+                    if (a == JOptionPane.OK_OPTION) {
+                        jtModelo.removeRow(tablaLB.getSelectedRow());
+
+                    }
+                    //EVENTOS ELIMINAR
+                }
+            }
+        }
+    }//GEN-LAST:event_tablaLBMouseClicked
+
+    private void tablaECMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaECMouseClicked
+        // TODO add your handling code here:
+         int column = tablaEC.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / tablaEC.getRowHeight();
+
+        if (row < tablaEC.getRowCount() && row >= 0 && column < tablaEC.getColumnCount() && column >= 0) {
+            Object value = tablaEC.getValueAt(row, column);
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
+                JButton boton = (JButton) value;
+
+                if (boton.getName().equals("e")) {
+                    int a = JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
+                    if (a == JOptionPane.OK_OPTION) {
+                        jtModelo.removeRow(tablaEC.getSelectedRow());
+
+                    }
+                    //EVENTOS ELIMINAR
+                }
+            }
+        }
+    }//GEN-LAST:event_tablaECMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1249,7 +1475,6 @@ public class registrot extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
