@@ -94,6 +94,7 @@ public class FrmMain extends javax.swing.JFrame {
 
         jTextField2_usuario2.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jTextField2_usuario2.setForeground(new java.awt.Color(51, 51, 51));
+        jTextField2_usuario2.setText("User");
         jTextField2_usuario2.setBorder(null);
         jTextField2_usuario2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -104,6 +105,7 @@ public class FrmMain extends javax.swing.JFrame {
 
         jTextField2_empresa.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jTextField2_empresa.setForeground(new java.awt.Color(51, 51, 51));
+        jTextField2_empresa.setText("Uniaces");
         jTextField2_empresa.setBorder(null);
         jTextField2_empresa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -193,6 +195,7 @@ public class FrmMain extends javax.swing.JFrame {
 
         jTextField2_banco.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jTextField2_banco.setForeground(new java.awt.Color(51, 51, 51));
+        jTextField2_banco.setText("Davivienda");
         jTextField2_banco.setBorder(null);
         jTextField2_banco.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {

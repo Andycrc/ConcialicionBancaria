@@ -887,11 +887,7 @@ public class registrot extends javax.swing.JPanel {
                 }
                
         }
-        this.Descrip.setText("");
-        this.cargoJ.setText("");
-        this.abonoJ.setText("");
-        this.np.setText("");
-        this.Saldoi.setText("");
+        
         
        
         
@@ -1105,12 +1101,7 @@ public class registrot extends javax.swing.JPanel {
 
                 }
         }    
-        this.Descrip.setText("");
-        this.cargoJ.setText("");
-        this.abonoJ.setText("");
-        this.np.setText("");
-        this.Saldoi.setText("");
-        
+    
         
     }//GEN-LAST:event_ECBActionPerformed
 
@@ -1127,7 +1118,7 @@ public class registrot extends javax.swing.JPanel {
         this.cargosEC.setText("");
         this.abonosEC.setText("");
         this.totalEC.setText("");
-        this.jButton3.setEnabled(true);
+        
 
         
 
@@ -1166,7 +1157,7 @@ public class registrot extends javax.swing.JPanel {
 //           ps1EC.executeUpdate();
            this.InicioDinamico();
            this.LimpiarTablas();
-           this.jButton3.setEnabled(false);
+           this.jButton3.setEnabled(true);
           
            
            
@@ -1525,7 +1516,7 @@ public class registrot extends javax.swing.JPanel {
                 if (boton.getName().equals("e")) {
                     int a = JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
                     if (a == JOptionPane.OK_OPTION) {
-                        jtModelo.removeRow(tablaEC.getSelectedRow());
+                        JTableModel2.removeRow(tablaEC.getSelectedRow());
 
                     }
                     //EVENTOS ELIMINAR
