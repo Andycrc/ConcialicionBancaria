@@ -17,6 +17,15 @@ public class AsientoTB {
     private String cargo;
     private String abono;
     private String saldoi;
+    private String estado;
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
     public String getNP() {
         return NP;

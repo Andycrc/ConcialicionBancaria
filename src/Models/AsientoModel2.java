@@ -39,9 +39,9 @@ public class AsientoModel2 {
                 "op, "+
                  "fecha , " +
                  "descrip, "+
-                "cargo,"+
-                 "abono, "+
-                 "saldoinicial "+
+                "abono,"+
+                 "cargo, "+
+                 "saldoinicial,estado "+
                  "from estadocuenta";            
 //                 "where ctcodigo_cuenta = ";
             
@@ -55,16 +55,19 @@ public class AsientoModel2 {
                 datos.setNP(resultados.getString("op"));
                 datos.setFechaop(resultados.getString("fecha"));       
                 datos.setDesc(resultados.getString("descrip"));
-                datos.setCargo(resultados.getString("cargo"));
-                datos.setAbono(resultados.getString("abono"));
+                  datos.setAbono(resultados.getString("abono"));
+                datos.setCargo(resultados.getString("cargo"));           
                 datos.setSaldoi(resultados.getString("saldoinicial"));
+                datos.setEstado(resultados.getString("estado"));
+
 
                model.addRow(new Object[]{datos.getNP(), 
                    datos.getFechaop(),
                    datos.getDesc(),                   
-                    datos.getAbono(),
+                   datos.getAbono(),
                    datos.getCargo(),                  
-                   datos.getSaldoi()
+                   datos.getSaldoi(),
+                   datos.getEstado()
                          });
             }       
             return model;

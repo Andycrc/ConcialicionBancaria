@@ -45,7 +45,7 @@ public class AsientoModel {
                  "descrip, "+
                 "cargo,"+
                  "abono, "+
-                 "saldoinicial "+
+                 "saldoinicial,estado "+
                  "from librobanco";            
 //                 "where ctcodigo_cuenta = ";
             
@@ -62,13 +62,16 @@ public class AsientoModel {
                 datos.setCargo(resultados.getString("cargo"));
                 datos.setAbono(resultados.getString("abono"));
                 datos.setSaldoi(resultados.getString("saldoinicial"));
+                datos.setEstado(resultados.getString("estado"));
 
                model.addRow(new Object[]{datos.getNP(), 
                    datos.getFechaop(),
                    datos.getDesc(),
                    datos.getCargo(),
                    datos.getAbono(),
-                   datos.getSaldoi()
+                   datos.getSaldoi(),
+                   datos.getEstado()
+                   
                          });
             }       
             return model;

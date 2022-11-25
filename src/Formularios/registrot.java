@@ -51,7 +51,7 @@ public class registrot extends javax.swing.JPanel {
     /**
      * Creates new form registrot
      */
-    String vFecha,vDescriP,vNP,vSaldoi,vCargo,vAbono;
+    String vFecha,vDescriP,vNP,vSaldoi,vCargo,vAbono,vEstado;
     DefaultTableModel jtModelo,JTableModel2;
     AsientoModel cn;
     AsientoModel2 cn2;
@@ -170,7 +170,7 @@ public class registrot extends javax.swing.JPanel {
         this.abonoslb.setText(""+sumA);
         this.cargoslb.setText(""+sumC);
         this.saldosLb.setText(""+saldoInicial);
-        Double VTotalLB= saldoInicial+sumA-sumC;
+        Double VTotalLB= saldoInicial+sumC-sumA;
         this.TotalLB.setText(""+VTotalLB);
         
     
@@ -208,6 +208,10 @@ public class registrot extends javax.swing.JPanel {
     }
     
     public void conci(){
+        contador2=0;
+        contador1=0;
+        contador3=0;
+        contador4=0;
         for (int i = 0; i < this.tablaLB.getRowCount(); i++) {
             for (int j = 0; j < this.tablaEC.getRowCount(); j++) {
                 if ((this.tablaLB.getValueAt(i, 0).equals(this.tablaEC.getValueAt(j, 0))) && (this.tablaLB.getValueAt(i, 4).equals(this.tablaEC.getValueAt(j, 4)) && (this.tablaLB.getValueAt(i, 3).equals(this.tablaEC.getValueAt(j, 3))))) {
@@ -215,11 +219,11 @@ public class registrot extends javax.swing.JPanel {
                     this.tablaEC.setValueAt("Conciliado", j, 6);
                     break;
                 } else {
-                    if (Float.parseFloat(this.tablaLB.getValueAt(i, 4).toString()) > 0) {
-                        this.tablaLB.setValueAt(1, i, 6);
+                    if (Float.parseFloat(this.tablaLB.getValueAt(i, 3).toString()) > 0) {
+                        this.tablaLB.setValueAt("1", i, 6);
                         
-                    } else if (Float.parseFloat(this.tablaLB.getValueAt(i, 3).toString()) > 0) {
-                        this.tablaLB.setValueAt(2, i, 6);
+                    } else if (Float.parseFloat(this.tablaLB.getValueAt(i, 4).toString()) > 0) {
+                        this.tablaLB.setValueAt("2", i, 6);
 
                     }
 
@@ -236,9 +240,9 @@ public class registrot extends javax.swing.JPanel {
                     break;
                 } else {
                     if (Float.parseFloat(this.tablaEC.getValueAt(i, 4).toString()) > 0) {
-                        this.tablaEC.setValueAt(3, i, 6);
+                        this.tablaEC.setValueAt("3", i, 6);
                     } else if (Float.parseFloat(this.tablaEC.getValueAt(i, 3).toString()) > 0) {
-                        this.tablaEC.setValueAt(4, i, 6);
+                        this.tablaEC.setValueAt("4", i, 6);
 
                     }
 
@@ -249,36 +253,7 @@ public class registrot extends javax.swing.JPanel {
 
         }
         
-        for (int i = 0; i < this.tablaLB.getRowCount(); i++) {
-            if(this.tablaLB.getValueAt(i, 6).toString()!="Conciliado"){
-                 if(Float.parseFloat(this.tablaLB.getValueAt(i, 6).toString()) == 1){
-                contador1+=Float.parseFloat(this.tablaLB.getValueAt(i, 4).toString());
-            }
-            else if(Float.parseFloat(this.tablaLB.getValueAt(i, 6).toString()) == 2){
-
-                contador2+=Float.parseFloat(this.tablaLB.getValueAt(i, 3).toString());
-                
-            }
-            }
-           
         
-        }
-       
-
-        for (int i = 0; i < this.tablaEC.getRowCount(); i++) {
-                    if(this.tablaEC.getValueAt(i, 6).toString()!="Conciliado"){
-                 if(Float.parseFloat(this.tablaEC.getValueAt(i, 6).toString()) == 3){
-                contador3+=Float.parseFloat(this.tablaEC.getValueAt(i, 4).toString());
-            }
-            else if(Float.parseFloat(this.tablaEC.getValueAt(i, 6).toString()) == 4){
-                                System.out.println("entre aca");
-
-                contador4+=Float.parseFloat(this.tablaEC.getValueAt(i, 3).toString());
-                
-            }
-            }
-        
-        }
 //        System.out.println("El valor de los 1 es:"+contador1);
 //        System.out.println("El valor de los 2 es:"+contador2);
 //         System.out.println("El valor de los 3 es:"+contador3);
@@ -286,6 +261,40 @@ public class registrot extends javax.swing.JPanel {
 //        
         
     
+    
+    
+    }
+    public void sumasnexos(){
+    
+    for (int i = 0; i < this.tablaLB.getRowCount(); i++) {
+
+            if(this.tablaLB.getValueAt(i, 6).equals("1")){
+                contador1+=Float.parseFloat(this.tablaLB.getValueAt(i, 3).toString());
+            }
+            else if(this.tablaLB.getValueAt(i, 6).equals("2")){
+
+                contador2+=Float.parseFloat(this.tablaLB.getValueAt(i, 4).toString());
+                
+            }
+   
+           
+        
+        }
+       
+
+        for (int i = 0; i < this.tablaEC.getRowCount(); i++) {
+
+            if(this.tablaEC.getValueAt(i, 6).equals("3")){
+                contador3+=Float.parseFloat(this.tablaEC.getValueAt(i, 4).toString());
+            }
+            else if(this.tablaEC.getValueAt(i, 6).equals("4")){
+
+                contador4+=Float.parseFloat(this.tablaEC.getValueAt(i, 3).toString());
+                
+            }
+            }
+        
+        
     
     
     }
@@ -706,7 +715,7 @@ public class registrot extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jButton3.setFont(new java.awt.Font("Roboto Medium", 0, 11)); // NOI18N
-        jButton3.setText("Procesar");
+        jButton3.setText("Guardar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -834,6 +843,8 @@ public class registrot extends javax.swing.JPanel {
         vAbono = this.abonoJ.getText();
         vNP = this.np.getText();
         vSaldoi = this.Saldoi.getText();
+  
+        
         
         //VALIDACIONES DEL INGRESO DE DATOS A LAS TABLAS
         if(fechFC.getDate()==null ||(Descrip.getText().trim().length() == 0) 
@@ -876,6 +887,12 @@ public class registrot extends javax.swing.JPanel {
                 }
                
         }
+        this.Descrip.setText("");
+        this.cargoJ.setText("");
+        this.abonoJ.setText("");
+        this.np.setText("");
+        this.Saldoi.setText("");
+        
        
         
     }//GEN-LAST:event_LBAActionPerformed
@@ -899,16 +916,18 @@ public class registrot extends javax.swing.JPanel {
         // TODO add your handling code here:
         this.procesar();
         this.conci();
+        
         conector cc = new conector();
         Connection cn = cc.conectar();
         int cont = 0;
-        String consult = "insert into librobanco(op,saldoinicial,cargo,abono,descrip,fecha) values(?,?,?,?,?,?)";
-        String consult2 ="insert into estadocuenta(op,saldoinicial,cargo,abono,descrip,fecha) values(?,?,?,?,?,?)";
+        String consult = "insert into librobanco(op,saldoinicial,cargo,abono,descrip,fecha,estado) values(?,?,?,?,?,?,?)";
+        String consult2 ="insert into estadocuenta(op,saldoinicial,abono,cargo,descrip,fecha,estado) values(?,?,?,?,?,?,?)";
 
        
         //insertamos en la base en tabla LB
              try {
                 //Statement stmt = cn.createStatement();
+                vSaldoi=this.Saldoi.getText();
 
                 if (tablaEC.getRowCount() == 0) {
                     JOptionPane.showMessageDialog(null, "No Existen Datos", "Advertencia", JOptionPane.WARNING_MESSAGE);
@@ -918,24 +937,23 @@ public class registrot extends javax.swing.JPanel {
                         vNP = (String) tablaEC.getValueAt(i, 0);
                         vFecha = (String) tablaEC.getValueAt(i, 1);
                         vDescriP = (String) tablaEC.getValueAt(i, 2);
-                        vCargo = (String) tablaEC.getValueAt(i, 3);
-                        vAbono = (String) tablaEC.getValueAt(i, 4);
+                        vCargo = (String) tablaEC.getValueAt(i, 4);
+                        vAbono = (String) tablaEC.getValueAt(i, 3);
+                        vEstado = (String) tablaEC.getValueAt(i, 6);
+                        
 
-                        PreparedStatement ps = cn.prepareStatement(consult);
+                        PreparedStatement ps = cn.prepareStatement(consult2);
                         
   
      
                             ps.setInt(1, Integer.parseInt(vNP));
-                            if(tablaEC.getRowCount() > 0){
-                              ps.setDouble(2, 0);
-
-                            }else{
-                                ps.setDouble(2, Double.parseDouble(vSaldoi));
-                            }
-                            ps.setDouble(3, Double.parseDouble(vCargo));
-                            ps.setDouble(4, Double.parseDouble(vAbono));
+                            ps.setDouble(2, Double.parseDouble(vSaldoi));
+                            ps.setDouble(3, Double.parseDouble(vAbono));
+                            ps.setDouble(4, Double.parseDouble(vCargo));
                             ps.setString(5, vDescriP);
                             ps.setString(6, vFecha);
+                            ps.setString(7, vEstado);
+                            
 
                        
 
@@ -943,6 +961,7 @@ public class registrot extends javax.swing.JPanel {
 
                  
                         ps.executeUpdate();
+                        vSaldoi="0";
 
                     }
                     JOptionPane.showMessageDialog(null, "Cambios guardados con exito. EC", "Con exito", JOptionPane.INFORMATION_MESSAGE);
@@ -956,7 +975,7 @@ public class registrot extends javax.swing.JPanel {
         //Insertamos en base en table EC
             try {
                 //Statement stmt = cn.createStatement();
-
+                vSaldoi=this.Saldoi.getText();
                 if (tablaLB.getRowCount() == 0) {
                     JOptionPane.showMessageDialog(null, "No Existen Datos", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 } else {
@@ -966,26 +985,23 @@ public class registrot extends javax.swing.JPanel {
                         vDescriP = (String) tablaLB.getValueAt(i, 2);
                         vCargo = (String) tablaLB.getValueAt(i, 3);
                         vAbono = (String) tablaLB.getValueAt(i, 4);
-                                                System.out.println(""+vNP+vFecha+vDescriP+vCargo+vAbono);
+                        
+                        vEstado = (String) tablaLB.getValueAt(i, 6);
 
 
-                        PreparedStatement ps1 = cn.prepareStatement(consult2);
+
+                        PreparedStatement ps1 = cn.prepareStatement(consult);
                         
   
      
-                            ps1.setInt(1, Integer.parseInt(vNP));
-                            if(tablaLB.getRowCount() > 0){
-                              ps1.setDouble(2, 0);
-
-                            }else{
-                                ps1.setDouble(2, Double.parseDouble(vSaldoi));
-                            }
-                            
+                            ps1.setInt(1, Integer.parseInt(vNP));                           
+                            ps1.setDouble(2, Double.parseDouble(vSaldoi));                          
                             ps1.setDouble(3, Double.parseDouble(vCargo));
                             ps1.setDouble(4, Double.parseDouble(vAbono));
 
                             ps1.setString(5, vDescriP);
                             ps1.setString(6, vFecha);
+                            ps1.setString(7, vEstado);
 
                        
 
@@ -993,17 +1009,20 @@ public class registrot extends javax.swing.JPanel {
 
                  
                         ps1.executeUpdate();
+                        vSaldoi="0";
 
                     }
                     JOptionPane.showMessageDialog(null, "Cambios guardados con exito. LB", "Con exito", JOptionPane.INFORMATION_MESSAGE);
 
                 }
                 this.jButton3.setEnabled(false);
+                
+                
             } catch (Exception e) {
 
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }
-
+            
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void IniciarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarBActionPerformed
@@ -1046,7 +1065,7 @@ public class registrot extends javax.swing.JPanel {
         vAbono = this.abonoJ.getText();
         vNP = this.np.getText();
         vSaldoi = this.Saldoi.getText();
-        
+
         //VALIDACIONES DEL INGRESO DE DATOS A LAS TABLAS
         if(fechFC.getDate()==null ||(Descrip.getText().trim().length() == 0) 
                 || (vCargo.trim().length()==0) || (vAbono.trim().length()==0)|| (vNP.trim().length()==0)
@@ -1086,6 +1105,12 @@ public class registrot extends javax.swing.JPanel {
 
                 }
         }    
+        this.Descrip.setText("");
+        this.cargoJ.setText("");
+        this.abonoJ.setText("");
+        this.np.setText("");
+        this.Saldoi.setText("");
+        
         
     }//GEN-LAST:event_ECBActionPerformed
 
@@ -1093,6 +1118,19 @@ public class registrot extends javax.swing.JPanel {
         // TODO add your handling code here:
         conector cc = new conector();
         Connection cn = cc.conectar();
+        
+        this.saldosLb.setText("");
+        this.cargoslb.setText("");
+        this.abonoslb.setText("");
+        this.TotalLB.setText("");
+        this.saldoIniciarEC.setText("");
+        this.cargosEC.setText("");
+        this.abonosEC.setText("");
+        this.totalEC.setText("");
+        this.jButton3.setEnabled(true);
+
+        
+
         
         //dropeamos ambas tablas 
         String BorrarTablaLB = "DELETE From estadocuenta";
@@ -1128,7 +1166,7 @@ public class registrot extends javax.swing.JPanel {
 //           ps1EC.executeUpdate();
            this.InicioDinamico();
            this.LimpiarTablas();
-           this.jButton3.setEnabled(true);
+           this.jButton3.setEnabled(false);
           
            
            
@@ -1153,8 +1191,10 @@ public class registrot extends javax.swing.JPanel {
         // TODO add your handling code here:
         FrmMain main = new FrmMain();
         
+//        this.procesar();
+//        this.conci();
         this.procesar();
-        this.conci();
+        this.sumasnexos();
         Document document = new Document();
         try { 
             PdfWriter writer = PdfWriter.getInstance(document,
@@ -1231,15 +1271,17 @@ public class registrot extends javax.swing.JPanel {
             t1.addCell("Descripcion");
             t1.addCell("Cargo");
             for (int i = 0; i < tablaLB.getRowCount(); i++) {
-                if(this.tablaEC.getValueAt(i, 6).toString()!="Conciliado"){
-                 if(Float.parseFloat(this.tablaLB.getValueAt(i, 6).toString()) == 1){
+                System.out.println("no es aqui");
+//                if(this.tablaEC.getValueAt(i, 6).toString()!="Conciliado"){
+                    System.out.println("entre en consilidado");
+                 if(this.tablaLB.getValueAt(i, 6).equals("1")){
                     t1.addCell((String) tablaLB.getValueAt(i, 0));
                     t1.addCell((String) tablaLB.getValueAt(i, 1));
                     t1.addCell(tablaLB.getValueAt(i, 2).toString());
                     t1.addCell(tablaLB.getValueAt(i, 3).toString());
-                 }
+//                 }
                 }
-
+//
 
             }
             document.add(t1);
@@ -1252,15 +1294,14 @@ public class registrot extends javax.swing.JPanel {
             t2.addCell("Descripcion");
             t2.addCell("abonos");
             for (int i = 0; i < tablaLB.getRowCount(); i++) {
-                  if(this.tablaEC.getValueAt(i, 6).toString()!="Conciliado"){
-                    if(Float.parseFloat(this.tablaLB.getValueAt(i, 6).toString()) == 2){
+                    if(this.tablaLB.getValueAt(i, 6).equals("2")){
                      t2.addCell((String) tablaLB.getValueAt(i, 0));
                      t2.addCell((String) tablaLB.getValueAt(i, 1));
                      t2.addCell(tablaLB.getValueAt(i, 2).toString());
-                     t2.addCell(tablaLB.getValueAt(i, 3).toString());
+                     t2.addCell(tablaLB.getValueAt(i, 4).toString());
                     }
                   
-                  }
+   
    
 
             }
@@ -1274,15 +1315,14 @@ public class registrot extends javax.swing.JPanel {
             t3.addCell("Descripcion");
             t3.addCell("cargos");
             for (int i = 0; i < tablaEC.getRowCount(); i++) {
-                 if(this.tablaEC.getValueAt(i, 6).toString()!="Conciliado"){
-                   if(Float.parseFloat(this.tablaEC.getValueAt(i, 6).toString()) == 3){
+                   if(this.tablaEC.getValueAt(i, 6).equals("3")){
                      t3.addCell((String) tablaEC.getValueAt(i, 0));
                      t3.addCell((String) tablaEC.getValueAt(i, 1));
                      t3.addCell(tablaEC.getValueAt(i, 2).toString());
                      t3.addCell(tablaEC.getValueAt(i, 4).toString());
                     }
                  
-                 }
+
 
 
             }
@@ -1297,8 +1337,8 @@ public class registrot extends javax.swing.JPanel {
             t4.addCell("Descripcion");
             t4.addCell("abonos");
             for (int i = 0; i < tablaEC.getRowCount(); i++) {
-                 if(this.tablaEC.getValueAt(i, 6).toString()!="Conciliado"){
-                    if(Float.parseFloat(this.tablaEC.getValueAt(i, 6).toString()) == 4){
+//                 if(this.tablaEC.getValueAt(i, 6).toString()!="Conciliado"){
+                    if(this.tablaEC.getValueAt(i, 6).equals("4")){
                      t4.addCell((String) tablaEC.getValueAt(i, 0));
                      t4.addCell((String) tablaEC.getValueAt(i, 1));
                      t4.addCell(tablaEC.getValueAt(i, 2).toString());
@@ -1306,7 +1346,7 @@ public class registrot extends javax.swing.JPanel {
                      }
                  
                  
-                 }
+//                 }
 
 
             }
@@ -1371,8 +1411,11 @@ public class registrot extends javax.swing.JPanel {
            document.add(totalLBP);
            document.add(Separador);
 
+        Paragraph titulo2 = new Paragraph("Tabla de Estadado de cuenta:");
 
-        
+                document.add(Separador);
+                 document.add(titulo2);
+                document.add(Separador);
 
 
 
@@ -1380,8 +1423,8 @@ public class registrot extends javax.swing.JPanel {
         tabla1.addCell("Numero de op");
         tabla1.addCell("Fecha");
         tabla1.addCell("Descripcion");
-        tabla1.addCell("Cargo");
         tabla1.addCell("Abono");
+        tabla1.addCell("Cargo");
         tabla1.addCell("saldo");
         for (int i = 0; i < tablaEC.getRowCount(); i++) {
                         
